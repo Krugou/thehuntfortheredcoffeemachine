@@ -1,0 +1,11 @@
+Model Information:
+* title:	Bridge
+* source:	https://sketchfab.com/3d-models/bridge-238ed13f49ed4bea81eaa8bcbf427e28
+* author:	Viky_3D (https://sketchfab.com/VikyStefiniv)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Bridge" (https://sketchfab.com/3d-models/bridge-238ed13f49ed4bea81eaa8bcbf427e28) by Viky_3D (https://sketchfab.com/VikyStefiniv) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
