@@ -12,12 +12,24 @@ jobs:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: npm i && npm run build
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: install dependencies
+        run: npm install
+        working-directory: ./thegame
+      - name: Building the app
+        run: VITE_BUILD_DATE=$(date) npm run build
+        working-directory: ./thegame
+        env:
+          VITE_APP_FIREBASE_API_KEY: ${{ secrets.VITE_APP_FIREBASE_API_KEY }}
+          VITE_APP_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_APP_FIREBASE_AUTH_DOMAIN }}
+          VITE_APP_FIREBASE_PROJECT_ID: ${{ secrets.VITE_APP_FIREBASE_PROJECT_ID }}
+          VITE_APP_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_APP_FIREBASE_STORAGE_BUCKET }}
+          VITE_APP_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_APP_FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_APP_FIRE_APP_ID: ${{ secrets.VITE_APP_FIRE_APP_ID }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: >-
-            ${{ secrets.FIREBASE_SERVICE_ACCOUNT_THEHUNTFORTHEREDCOFFEEMACHINE
-            }}
+            ${{ secrets.FIREBASE_SERVICE_ACCOUNT_THEHUNTFORTHEREDCOFFEEMACHINE }}
           projectId: thehuntfortheredcoffeemachine
