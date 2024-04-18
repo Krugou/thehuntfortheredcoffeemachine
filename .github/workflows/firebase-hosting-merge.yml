@@ -13,6 +13,9 @@ permissions:
  id-token: write
 jobs:
  build_and_deploy:
+  environment:
+   name: github-pages
+   url: https://thehuntfortheredcoffeemachine.web.app/
   runs-on: ubuntu-latest
   steps:
    - name: Checkout
