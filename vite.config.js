@@ -6,12 +6,12 @@ export default ({command}) => ({
 	root: 'three-dev',
 	publicDir: '../3d-assets',
 	build: {
-		outDir: '../../webBuild5',
+		outDir: './build',
 		emptyOutDir: true,
 		rollupOptions: {
 			plugins: [terser({compress: {drop_console: true}})],
 		},
 	},
 	plugins: process.env.USE_SSL === 'true' ? [basicSsl()] : [],
-	base: command === 'serve' ? '/' : '/3DModelingAndMRApps/webBuild5/',
+	base: '/'
 });

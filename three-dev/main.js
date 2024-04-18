@@ -4,12 +4,8 @@ import {RGBELoader} from 'three/addons/loaders/RGBELoader.js';
 import {VRButton} from 'three/addons/webxr/VRButton.js';
 import {XRControllerModelFactory} from 'three/addons/webxr/XRControllerModelFactory.js';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
-let basePath;
-if (import.meta.env.MODE === 'production') {
-	basePath = '/3DModelingAndMRApps/webBuild5/';
-} else {
-	basePath = '/';
-}
+let basePath = '/';
+
 // create a new empty group to include imported models you want to interact with
 let group = new THREE.Group();
 group.name = 'Interaction-Group';
@@ -115,69 +111,71 @@ function init() {
 	animate();
 }
 function loadmodels() {
-	new RGBELoader().setPath(basePath).load('hdr/Scenery.hdr', function (texture) {
-		texture.mapping = THREE.EquirectangularReflectionMapping;
+	new RGBELoader()
+		.setPath(basePath)
+		.load('hdr/Scenery.hdr', function (texture) {
+			texture.mapping = THREE.EquirectangularReflectionMapping;
 
-		scene.background = texture;
-		scene.environment = texture;
-		renderer.toneMappingExposure = 10.0;
-		// modelmazda
+			scene.background = texture;
+			scene.environment = texture;
+			renderer.toneMappingExposure = 10.0;
+			// modelmazda
 
-		const loader = new GLTFLoader().setPath(basePath);
-		loader.load('mazda.gltf', async function (gltf) {
-			const modelmazda = gltf.scene;
+			const loader = new GLTFLoader().setPath(basePath);
+			loader.load('mazda.gltf', async function (gltf) {
+				const modelmazda = gltf.scene;
 
-			// wait until the model can be added to the scene without blocking due to shader compilation
-			modelmazda.position.set(17, 0, -1);
+				// wait until the model can be added to the scene without blocking due to shader compilation
+				modelmazda.position.set(17, 0, -1);
 
-			await renderer.compileAsync(modelmazda, camera, scene);
+				await renderer.compileAsync(modelmazda, camera, scene);
 
-			scene.add(modelmazda);
+				scene.add(modelmazda);
 
-			// render();
+				// render();
+			});
+
+			// model2
+			loader.load('tow_boat/scene.gltf', async function (gltf) {
+				const model2 = gltf.scene;
+
+				// wait until the model can be added to the scene without blocking due to shader compilation
+				model2.position.set(-20, 5, -1);
+				model2.rotation.y = THREE.MathUtils.degToRad(90);
+
+				await renderer.compileAsync(model2, camera, scene);
+				teleportgroup.add(model2);
+				// scene.add(model2);
+
+				// render();
+			});
+			// model3
+			loader.load('street_lamp/street_lamp.gltf', async function (gltf) {
+				const model3 = gltf.scene;
+
+				// wait until the model can be added to the scene without blocking due to shader compilation
+				model3.position.set(0, 0, -1);
+
+				await renderer.compileAsync(model3, camera, scene);
+
+				// scene.add(model3);
+				group.add(model3);
+				// render();
+			});
+			// model2
+			loader.load('mylandscape/landscape.gltf', async function (gltf) {
+				const model2 = gltf.scene;
+
+				// wait until the model can be added to the scene without blocking due to shader compilation
+				model2.position.set(0, 0, 0);
+
+				await renderer.compileAsync(model2, camera, scene);
+
+				scene.add(model2);
+
+				// render();
+			});
 		});
-
-		// model2
-		loader.load('tow_boat/scene.gltf', async function (gltf) {
-			const model2 = gltf.scene;
-
-			// wait until the model can be added to the scene without blocking due to shader compilation
-			model2.position.set(-20, 5, -1);
-			model2.rotation.y = THREE.MathUtils.degToRad(90);
-
-			await renderer.compileAsync(model2, camera, scene);
-			teleportgroup.add(model2);
-			// scene.add(model2);
-
-			// render();
-		});
-		// model3
-		loader.load('street_lamp/street_lamp.gltf', async function (gltf) {
-			const model3 = gltf.scene;
-
-			// wait until the model can be added to the scene without blocking due to shader compilation
-			model3.position.set(0, 0, -1);
-
-			await renderer.compileAsync(model3, camera, scene);
-
-			// scene.add(model3);
-			group.add(model3);
-			// render();
-		});
-		// model2
-		loader.load('mylandscape/landscape.gltf', async function (gltf) {
-			const model2 = gltf.scene;
-
-			// wait until the model can be added to the scene without blocking due to shader compilation
-			model2.position.set(0, 0, 0);
-
-			await renderer.compileAsync(model2, camera, scene);
-
-			scene.add(model2);
-
-			// render();
-		});
-	});
 }
 initVR();
 marker = new THREE.Mesh(
