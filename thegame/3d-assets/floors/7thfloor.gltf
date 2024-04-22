@@ -90,10 +90,10 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":4154,
+			"count":4344,
 			"max":[
 				306.9310302734375,
-				2.9999969005584717,
+				3.000678539276123,
 				159.543212890625
 			],
 			"min":[
@@ -106,109 +106,109 @@
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":4154,
+			"count":4344,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":4154,
+			"count":4344,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":8502,
+			"count":8826,
 			"type":"SCALAR"
 		},
 		{
 			"bufferView":4,
 			"componentType":5126,
-			"count":4,
+			"count":15,
 			"max":[
-				41.066673278808594,
+				40.850929260253906,
 				0,
 				58.67453384399414
 			],
 			"min":[
-				-8.614099502563477,
+				-6.003756523132324,
 				0,
-				-58.67453384399414
+				-54.07678985595703
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":5,
 			"componentType":5126,
-			"count":4,
+			"count":15,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":6,
 			"componentType":5126,
-			"count":4,
+			"count":15,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":7,
 			"componentType":5123,
-			"count":6,
+			"count":39,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":49848,
+			"byteLength":52128,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":49848,
-			"byteOffset":49848,
+			"byteLength":52128,
+			"byteOffset":52128,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":33232,
-			"byteOffset":99696,
+			"byteLength":34752,
+			"byteOffset":104256,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":17004,
-			"byteOffset":132928,
+			"byteLength":17652,
+			"byteOffset":139008,
 			"target":34963
 		},
 		{
 			"buffer":0,
-			"byteLength":48,
-			"byteOffset":149932,
+			"byteLength":180,
+			"byteOffset":156660,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":48,
-			"byteOffset":149980,
+			"byteLength":180,
+			"byteOffset":156840,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":32,
-			"byteOffset":150028,
+			"byteLength":120,
+			"byteOffset":157020,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":12,
-			"byteOffset":150060,
+			"byteLength":78,
+			"byteOffset":157140,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":150072,
+			"byteLength":157220,
 			"uri":"7thfloor.bin"
 		}
 	]
