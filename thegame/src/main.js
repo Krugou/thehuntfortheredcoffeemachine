@@ -182,7 +182,7 @@ function loadmodels() {
 			});
 		}
 		// model2
-		loader.load('mylandscape/landscape.gltf', async function (gltf) {
+		loader.load('floors/7thfloor.gltf', async function (gltf) {
 			const model2 = gltf.scene;
 
 			// wait until the model can be added to the scene without blocking due to shader compilation
