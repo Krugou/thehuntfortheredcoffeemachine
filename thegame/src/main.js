@@ -6,6 +6,7 @@ import {XRControllerModelFactory} from 'three/addons/webxr/XRControllerModelFact
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 let basePath = '/';
 
+let directionalLight;
 // create a new empty group to include imported models you want to interact with
 let group = new THREE.Group();
 group.name = 'Interaction-Group';
@@ -24,7 +25,7 @@ const tempMatrix = new THREE.Matrix4();
 // Declare variables for the scene, camera, renderer, cube, and controls
 let container, camera, scene, renderer, cube, controls;
 let lastLoggedPosition = null;
-
+let model2;
 // Call the init function to initialize the scene
 init();
 
@@ -58,15 +59,17 @@ function init() {
 
 	// Load a sound and set it as the Audio object's buffer
 	const audioLoader = new THREE.AudioLoader();
-	audioLoader.load('sounds/song.mp3', function (buffer) {
+	audioLoader.load('sounds/sound.mp3', function (buffer) {
 		sound.setBuffer(buffer);
 		sound.setLoop(true);
 		sound.setVolume(0.5);
 		sound.play();
 	});
+
 	// Create a new THREE.WebGLRenderer object
 	renderer = new THREE.WebGLRenderer({antialias: true});
 	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.shadowMap.enabled = true;
 
 	container.appendChild(renderer.domElement);
 
@@ -78,15 +81,16 @@ function init() {
 	// scene.add(cube);
 
 	// Add a directional light to the scene
-	const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
+	directionalLight = new THREE.DirectionalLight(0xff4500, 2);
 	scene.add(directionalLight);
 
-	// Add an axes helper to the scene
+	// // Add an axes helper to the scene
 	const axesHelper = new THREE.AxesHelper(5);
 	scene.add(axesHelper);
 
 	// Add ambient light to the scene
 	const light = new THREE.AmbientLight(0x404040); // soft white light
+	light.castShadow = true;
 	scene.add(light);
 
 	// Set the camera's position and look at the axes helper
@@ -118,7 +122,6 @@ function loadmodels() {
 		scene.environment = texture;
 		renderer.toneMappingExposure = 10.0;
 		// modelmazda
-
 		const loader = new GLTFLoader().setPath(basePath);
 		loader.load('mazda.gltf', async function (gltf) {
 			const modelmazda = gltf.scene;
@@ -135,11 +138,11 @@ function loadmodels() {
 
 		// model2
 		loader.load('tow_boat/scene.gltf', async function (gltf) {
-			const model2 = gltf.scene;
+			model2 = gltf.scene;
 
 			// wait until the model can be added to the scene without blocking due to shader compilation
-			model2.position.set(-20, 5, -1);
-			model2.rotation.y = THREE.MathUtils.degToRad(90);
+			model2.position.set(0, -0.1, 10);
+			model2.rotation.y = THREE.MathUtils.degToRad(-180);
 
 			await renderer.compileAsync(model2, camera, scene);
 			teleportgroup.add(model2);
@@ -148,18 +151,36 @@ function loadmodels() {
 			// render();
 		});
 		// model3
-		loader.load('street_lamp/street_lamp.gltf', async function (gltf) {
-			const model3 = gltf.scene;
+		for (let i = 0; i < 4; i++) {
+			loader.load('street_lamp/street_lamp.gltf', async function (gltf) {
+				const model3 = gltf.scene;
 
-			// wait until the model can be added to the scene without blocking due to shader compilation
-			model3.position.set(0, 0, -1);
+				// wait until the model can be added to the scene without blocking due to shader compilation
+				switch (i) {
+					case 0:
+						model3.position.set(-6, 0, 1);
+						break;
+					case 1:
+						model3.position.set(-6, 0, -1);
+						break;
+					case 2:
+						model3.position.set(6, 0, -1);
+						break;
+					case 3:
+						model3.position.set(6, 0, 1);
+						break;
+					default:
+						model3.position.set(0, 0, -1);
+						break;
+				}
 
-			await renderer.compileAsync(model3, camera, scene);
+				await renderer.compileAsync(model3, camera, scene);
 
-			// scene.add(model3);
-			group.add(model3);
-			// render();
-		});
+				// scene.add(model3);
+				group.add(model3);
+				// render();
+			});
+		}
 		// model2
 		loader.load('mylandscape/landscape.gltf', async function (gltf) {
 			const model2 = gltf.scene;
@@ -187,11 +208,13 @@ scene.add(marker);
 function initVR() {
 	// Enable WebXR in the renderer
 	document.body.appendChild(VRButton.createButton(renderer));
+
 	renderer.xr.enabled = true;
 	renderer.xr.addEventListener(
 		'sessionstart',
 		() => (baseReferenceSpace = renderer.xr.getReferenceSpace()),
 	);
+
 	// Create and configure the first controller
 	controller1 = renderer.xr.getController(0);
 	// Add event listeners for 'selectstart' and 'selectend' events
@@ -418,6 +441,8 @@ function cleanIntersected() {
 /**
  * Animates the scene by updating the controls and rendering the scene with the camera.
  */
+let clock = new THREE.Clock();
+
 function animate() {
 	renderer.setAnimationLoop(function () {
 		cleanIntersected();
@@ -425,6 +450,19 @@ function animate() {
 		intersectObjects(controller2);
 		moveMarker();
 		controls.update();
+
+		if (model2) {
+			let time = clock.getElapsedTime();
+
+			// Apply wave motion
+			model2.position.y = Math.sin(time) * 0.05;
+			model2.rotation.y = Math.sin(time) * 0.02;
+		}
+		if (directionalLight) {
+			directionalLight.position.x = Math.sin(clock.getElapsedTime()) * 0.02;
+			directionalLight.position.z = Math.cos(clock.getElapsedTime()) * 0.02;
+		}
+
 		renderer.render(scene, camera);
 	});
 }
