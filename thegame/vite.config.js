@@ -3,7 +3,7 @@ import {terser} from 'rollup-plugin-terser';
 import {defineConfig} from 'vite';
 
 export default ({command}) => ({
-	root: 'src',
+	root: './src',
 	publicDir: '../3d-assets',
 	build: {
 		outDir: '../../build',

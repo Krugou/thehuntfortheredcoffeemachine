@@ -4,7 +4,7 @@
 	"version": "1.0.0",
 	"scripts": {
 		"start": "npm run vrdev",
-		"dev": "npm i && vite --port 3333 --open --host",
+		"dev": "npm i && vite -d --port 3333 --open --host",
 		"vrdev": "cross-env USE_SSL=true npm run dev",
 		"build": "npm i && vite build --emptyOutDir"
 	},
