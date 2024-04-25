@@ -22,7 +22,7 @@ group.name = 'Interaction-Group';
 export let marker, baseReferenceSpace;
 
 // create a new empty group to include imported models you want
-// to teleport with
+// to teleport with asd
 export let teleportgroup = new THREE.Group();
 teleportgroup.name = 'Teleport-Group';
 export let controller1, controller2;
