@@ -11,7 +11,7 @@ export function loadmodels() {
 		renderer.toneMappingExposure = 10.0;
 		const loader = new GLTFLoader().setPath(basePath);
 
-		loader.load('floors/7thfloor.gltf', async function (gltf) {
+		loader.load('floors/2thfloor.gltf', async function (gltf) {
 			const model2 = gltf.scene;
 
 			model2.position.set(0, 0, 0);
