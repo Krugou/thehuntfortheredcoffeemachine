@@ -10,13 +10,32 @@ export function loadmodels() {
 		scene.environment = texture;
 		renderer.toneMappingExposure = 10.0;
 		const loader = new GLTFLoader().setPath(basePath);
+		loader.load('floors/7thfloor/7thfloor.gltf', async function (gltf) {
+			const model = gltf.scene;
 
-		loader.load('floors/2thfloor.gltf', async function (gltf) {
-			const model2 = gltf.scene;
+			model.position.set(0, 0, 0);
+			teleportgroup.add(model);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		loader.load('floors/7thfloor/7thwalls.gltf', async function (gltf) {
+			const model = gltf.scene;
 
-			model2.position.set(0, 0, 0);
-			teleportgroup.add(model2);
-			await renderer.compileAsync(model2, camera, scene);
+			model.position.set(0, 0, 0);
+			scene.add(model);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		loader.load('objects/hissi/hissi.gltf', async function (gltf) {
+			const model = gltf.scene;
+
+			model.position.set(0, 0, 0);
+			scene.add(model);
+			const clonedModel = model.clone();
+			clonedModel.position.z -= 2.75; // adjust the value as needed
+			scene.add(clonedModel);
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z -= 2.75; // adjust the value as needed
+			scene.add(anotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
 		});
 	});
 }

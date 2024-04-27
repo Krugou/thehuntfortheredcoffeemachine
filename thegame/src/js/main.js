@@ -35,12 +35,12 @@ export let container, camera, scene, renderer, cube, controls;
 export let lastLoggedPosition = null;
 export let model2;
 // Call the init function to initialize the scene
-init();
+start();
 
 /**
  * Initializes the 3D scene, camera, renderer, and objects.
  */
-export function init() {
+export function start() {
 	// Create a new div element and append it to the body
 	container = document.createElement('div');
 	document.body.appendChild(container);
@@ -56,7 +56,7 @@ export function init() {
 		75, // Field of view
 		window.innerWidth / window.innerHeight, // Aspect ratio
 		0.1, // Near clipping plane
-		1000, // Far clipping plane
+		30, // Far clipping plane
 	);
 	// Create an AudioListener and add it to the camera
 	const listener = new THREE.AudioListener();
