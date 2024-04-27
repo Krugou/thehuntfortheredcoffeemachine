@@ -30,7 +30,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Plane.002",
+			"name":"door",
 			"primitives":[
 				{
 					"attributes":{
@@ -47,7 +47,7 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":148,
+			"count":128,
 			"max":[
 				12.842620849609375,
 				2.9932427406311035,
@@ -63,51 +63,51 @@
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":148,
+			"count":128,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":148,
+			"count":128,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":300,
+			"count":240,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":1776,
+			"byteLength":1536,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1776,
-			"byteOffset":1776,
+			"byteLength":1536,
+			"byteOffset":1536,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1184,
-			"byteOffset":3552,
+			"byteLength":1024,
+			"byteOffset":3072,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":600,
-			"byteOffset":4736,
+			"byteLength":480,
+			"byteOffset":4096,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":5336,
+			"byteLength":4576,
 			"uri":"door.bin"
 		}
 	]

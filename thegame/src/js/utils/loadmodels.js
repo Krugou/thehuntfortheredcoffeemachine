@@ -24,6 +24,13 @@ export function loadmodels() {
 			scene.add(model);
 			await renderer.compileAsync(model, camera, scene);
 		});
+		loader.load('floors/7thfloor/7thdoors.gltf', async function (gltf) {
+			const model = gltf.scene;
+
+			model.position.set(0, 0, 0);
+			scene.add(model);
+			await renderer.compileAsync(model, camera, scene);
+		});
 		loader.load('objects/hissi/hissi.gltf', async function (gltf) {
 			const model = gltf.scene;
 
