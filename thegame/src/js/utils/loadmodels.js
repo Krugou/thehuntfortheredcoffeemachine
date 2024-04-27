@@ -36,7 +36,7 @@ export function loadmodels() {
 		loadModel(loader, 'floors/7thfloor/7thfloor.gltf', [0, 0, 0], true);
 		loadModel(loader, 'floors/7thfloor/7thwalls.gltf', [0, 0, 0]);
 		loadModel(loader, 'floors/7thfloor/7thdoors.gltf', [0, 0, 0]);
-		loadModel(loader, 'floors/7thfloor/extraStuff.gltf', [0, 0, 0]);
+		// loadModel(loader, 'floors/7thfloor/extraStuff.gltf', [0, 0, 0]);
 		loadModel(loader, 'objects/kitchen/kitchen.gltf', [0, 0, 0]);
 
 		// loader.load('objects/tuoli/tuoli.gltf', async function (gltf) {
