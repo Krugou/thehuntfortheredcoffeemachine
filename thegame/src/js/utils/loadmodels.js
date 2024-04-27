@@ -38,18 +38,18 @@ export function loadmodels() {
 			scene.add(model);
 			await renderer.compileAsync(model, camera, scene);
 		});
-		loader.load('objects/tuoli/tuoli.gltf', async function (gltf) {
-			const model = gltf.scene;
+		// loader.load('objects/tuoli/tuoli.gltf', async function (gltf) {
+		// 	const model = gltf.scene;
 
-			model.position.set(11, 0, -15);
+		// 	model.position.set(11, 0, -15);
 
-			scene.add(model);
-			const clonedModel = model.clone();
-			clonedModel.position.z += 2.75; // adjust the value as needed
-			scene.add(clonedModel);
+		// 	scene.add(model);
+		// 	const clonedModel = model.clone();
+		// 	clonedModel.position.z += 2.75; // adjust the value as needed
+		// 	scene.add(clonedModel);
 
-			await renderer.compileAsync(model, camera, scene);
-		});
+		// 	await renderer.compileAsync(model, camera, scene);
+		// });
 		loader.load('objects/smalldesk/smalldesk.gltf', async function (gltf) {
 			const model = gltf.scene;
 			// x-axis (left/right), y-axis (up/down), z-axis (forward/backward)
