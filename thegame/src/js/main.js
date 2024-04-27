@@ -7,6 +7,7 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import {animate} from '/js/utils/animate.js';
 import {cleanIntersected} from '/js/utils/cleanIntersected.js';
 import {getIntersections} from '/js/utils/getIntersections.js';
+import {loadGripModel} from '/js/utils/gripModel.js';
 import {loadmodels} from '/js/utils/loadmodels.js';
 import {onSelectEnd} from '/js/utils/onSelectEnd.js';
 import {onSelectStart} from '/js/utils/onSelectStart.js';
@@ -15,14 +16,9 @@ import {onSqueezeEnd, onSqueezeStart} from '/js/utils/squeeze.js';
 
 export let basePath = '/';
 export let directionalLight;
-// create a new empty group to include imported models you want to interact with
-export let group = new THREE.Group();
-group.name = 'Interaction-Group';
-
+export let interactionGroup = new THREE.Group();
+interactionGroup.name = 'Interaction-Group';
 export let marker, baseReferenceSpace;
-
-// create a new empty group to include imported models you want
-// to teleport with asd
 export let teleportgroup = new THREE.Group();
 teleportgroup.name = 'Teleport-Group';
 export let controller1, controller2;
@@ -30,11 +26,10 @@ export let controllerGrip1, controllerGrip2;
 export let raycaster;
 export const intersected = [];
 export const tempMatrix = new THREE.Matrix4();
-// Declare variables for the scene, camera, renderer, cube, and controls
 export let container, camera, scene, renderer, cube, controls;
 export let lastLoggedPosition = null;
 export let model2;
-// Call the init function to initialize the scene
+
 start();
 
 /**
@@ -49,7 +44,6 @@ export function start() {
 	scene = new THREE.Scene();
 
 	loadmodels();
-	// add the empty group to the scene
 	scene.add(teleportgroup);
 	// Create a new THREE.PerspectiveCamera object
 	camera = new THREE.PerspectiveCamera(
@@ -58,21 +52,6 @@ export function start() {
 		0.1, // Near clipping plane
 		30, // Far clipping plane
 	);
-	// Create an AudioListener and add it to the camera
-	const listener = new THREE.AudioListener();
-	camera.add(listener);
-
-	// Create a global audio source
-	const sound = new THREE.Audio(listener);
-
-	// Load a sound and set it as the Audio object's buffer
-	const audioLoader = new THREE.AudioLoader();
-	audioLoader.load('sounds/sound.mp3', function (buffer) {
-		sound.setBuffer(buffer);
-		sound.setLoop(true);
-		sound.setVolume(0.5);
-		sound.play();
-	});
 
 	// Create a new THREE.WebGLRenderer object
 	renderer = new THREE.WebGLRenderer({antialias: true});
@@ -80,13 +59,6 @@ export function start() {
 	renderer.shadowMap.enabled = true;
 
 	container.appendChild(renderer.domElement);
-
-	// Create a cube using THREE.BoxGeometry and THREE.MeshPhongMaterial
-	// const geometry = new THREE.BoxGeometry(1, 1, 1);
-	// const material = new THREE.MeshPhongMaterial({color: 0x00ff00});
-	// cube = new THREE.Mesh(geometry, material);
-	// Add the cube to the scene
-	// scene.add(cube);
 
 	// Add a directional light to the scene
 	directionalLight = new THREE.DirectionalLight(0xffffff, 2);
@@ -98,7 +70,6 @@ export function start() {
 
 	// Add ambient light to the scene
 	const light = new THREE.AmbientLight(0x404040); // soft white light
-	light.castShadow = true;
 	scene.add(light);
 
 	// Set the camera's position and look at the axes helper
@@ -112,12 +83,7 @@ export function start() {
 	// Update the controls after any manual changes to the camera's transform
 	camera.position.set(7, 2, 6);
 	controls.update();
-	// add the group to the scene
-	scene.add(group);
-	// // Set the cube's position, scale, and rotation
-	// cube.position.x = 0;
-	// cube.scale.set(2, 2, 2);
-	// cube.rotation.y = Math.PI / 4;
+	scene.add(interactionGroup);
 
 	// Call the animate export function to start the animation loop
 	animate();
@@ -176,29 +142,9 @@ export function initVR() {
 	// controllerGrip2.add(
 	// 	controllerModelFactory.createControllerModel(controllerGrip2),
 	// );
-	// // Add the grip to the scene
 	scene.add(controllerGrip2);
-	const loader = new GLTFLoader().setPath(basePath);
-	loader.load('low_poly_blue_handgun_pistol/scene.gltf', function (gltf) {
-		// gltf.scene.scale.set(0.0003, 0.0003, 0.0003);
-		gltf.scene.scale.set(0.1003, 0.1003, 0.1003);
+	loadGripModel(controllerGrip1, controllerGrip2);
 
-		let mymodel = gltf.scene;
-		mymodel.rotation.y = THREE.MathUtils.degToRad(-90);
-		mymodel.rotation.x = THREE.MathUtils.degToRad(-30);
-
-		// Move the model a little lower
-		mymodel.position.set(0, -0.11, 0);
-
-		// Add the model to the first controller
-		controllerGrip1.add(mymodel);
-
-		// Clone the model
-		let mymodel2 = mymodel.clone();
-
-		// Add the cloned model to the second controller
-		controllerGrip2.add(mymodel2);
-	});
 	// Create a line geometry
 	const geometry = new THREE.BufferGeometry().setFromPoints([
 		new THREE.Vector3(0, 0, 0),
@@ -217,12 +163,11 @@ export function initVR() {
 	// Create a raycaster
 	raycaster = new THREE.Raycaster();
 
-	// controller1.addEventListener('squeezestart', onSqueezeStart);
-	// controller1.addEventListener('squeezeend', onSqueezeEnd);
+	controller1.addEventListener('squeezestart', onSqueezeStart);
+	controller1.addEventListener('squeezeend', onSqueezeEnd);
 
-	// controller2.addEventListener('squeezestart', onSqueezeStart);
-	// controller2.addEventListener('squeezeend', onSqueezeEnd);
+	controller2.addEventListener('squeezestart', onSqueezeStart);
+	controller2.addEventListener('squeezeend', onSqueezeEnd);
 }
 
-// Add an event listener for the window resize event
 window.addEventListener('resize', resize, false);

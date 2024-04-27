@@ -1,7 +1,14 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {RGBELoader} from 'three/addons/loaders/RGBELoader.js';
-import {basePath, camera, renderer, scene, teleportgroup} from '../main.js';
+import {
+	basePath,
+	camera,
+	interactionGroup,
+	renderer,
+	scene,
+	teleportgroup,
+} from '../main.js';
 
 async function loadModel(loader, modelPath, position, teleportEnabled = false) {
 	loader.load(modelPath, async function (gltf) {
@@ -48,7 +55,7 @@ export function loadmodels() {
 			scene.add(model);
 			const clonedModel = model.clone();
 			clonedModel.position.z += 2.75; // adjust the value as needed
-			scene.add(clonedModel);
+			interactionGroup.add(clonedModel);
 
 			await renderer.compileAsync(model, camera, scene);
 		});
