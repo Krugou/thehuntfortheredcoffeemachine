@@ -110,7 +110,7 @@ export function start() {
 	controls = new OrbitControls(camera, renderer.domElement);
 
 	// Update the controls after any manual changes to the camera's transform
-	camera.position.set(7, 3, 6);
+	camera.position.set(7, 2, 6);
 	controls.update();
 	// add the group to the scene
 	scene.add(group);
@@ -217,11 +217,11 @@ export function initVR() {
 	// Create a raycaster
 	raycaster = new THREE.Raycaster();
 
-	controller1.addEventListener('squeezestart', onSqueezeStart);
-	controller1.addEventListener('squeezeend', onSqueezeEnd);
+	// controller1.addEventListener('squeezestart', onSqueezeStart);
+	// controller1.addEventListener('squeezeend', onSqueezeEnd);
 
-	controller2.addEventListener('squeezestart', onSqueezeStart);
-	controller2.addEventListener('squeezeend', onSqueezeEnd);
+	// controller2.addEventListener('squeezestart', onSqueezeStart);
+	// controller2.addEventListener('squeezeend', onSqueezeEnd);
 }
 
 // Add an event listener for the window resize event
