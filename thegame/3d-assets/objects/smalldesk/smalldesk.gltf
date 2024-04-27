@@ -15,7 +15,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"pienip\u00f6yt\u00e4",
+			"name":"smalldesk",
 			"scale":[
 				0.675612211227417,
 				0.675612211227417,
@@ -60,7 +60,7 @@
 	],
 	"meshes":[
 		{
-			"name":"pienip\u00f6yt\u00e4",
+			"name":"smalldesk",
 			"primitives":[
 				{
 					"attributes":{
@@ -87,7 +87,7 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":1024,
+			"count":1030,
 			"max":[
 				1.0390923023223877,
 				1.1947605609893799,
@@ -103,13 +103,13 @@
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":1024,
+			"count":1030,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":1024,
+			"count":1030,
 			"type":"VEC2"
 		},
 		{
@@ -156,57 +156,57 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":12288,
+			"byteLength":12360,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":12288,
-			"byteOffset":12288,
+			"byteLength":12360,
+			"byteOffset":12360,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":8192,
-			"byteOffset":24576,
+			"byteLength":8240,
+			"byteOffset":24720,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":4536,
-			"byteOffset":32768,
+			"byteOffset":32960,
 			"target":34963
 		},
 		{
 			"buffer":0,
 			"byteLength":432,
-			"byteOffset":37304,
+			"byteOffset":37496,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":432,
-			"byteOffset":37736,
+			"byteOffset":37928,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":288,
-			"byteOffset":38168,
+			"byteOffset":38360,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":120,
-			"byteOffset":38456,
+			"byteOffset":38648,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":38576,
-			"uri":"pienip%C3%B6yt%C3%A4.bin"
+			"byteLength":38768,
+			"uri":"smalldesk.bin"
 		}
 	]
 }

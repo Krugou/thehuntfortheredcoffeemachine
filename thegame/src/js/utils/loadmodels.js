@@ -31,6 +31,47 @@ export function loadmodels() {
 			scene.add(model);
 			await renderer.compileAsync(model, camera, scene);
 		});
+		loader.load('objects/kitchen/kitchen.gltf', async function (gltf) {
+			const model = gltf.scene;
+
+			model.position.set(0, 0, 0);
+			scene.add(model);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		loader.load('objects/tuoli/tuoli.gltf', async function (gltf) {
+			const model = gltf.scene;
+
+			model.position.set(11, 0, -15);
+
+			scene.add(model);
+			const clonedModel = model.clone();
+			clonedModel.position.z += 2.75; // adjust the value as needed
+			scene.add(clonedModel);
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z += 2.75; // adjust the value as needed
+			scene.add(anotherClonedModel);
+			const yetAnotherClonedModel = anotherClonedModel.clone();
+			yetAnotherClonedModel.position.z += 2.75; // adjust the value as needed
+			scene.add(yetAnotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		loader.load('objects/smalldesk/smalldesk.gltf', async function (gltf) {
+			const model = gltf.scene;
+			// x-axis (left/right), y-axis (up/down), z-axis (forward/backward)
+
+			model.position.set(10, 0, -10);
+			scene.add(model);
+			const clonedModel = model.clone();
+			clonedModel.position.z += 2.75; // adjust the value as needed
+			scene.add(clonedModel);
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z += 2.75; // adjust the value as needed
+			scene.add(anotherClonedModel);
+			const yetAnotherClonedModel = anotherClonedModel.clone();
+			yetAnotherClonedModel.position.z += 2.75; // adjust the value as needed
+			scene.add(yetAnotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
+		});
 		loader.load('objects/hissi/hissi.gltf', async function (gltf) {
 			const model = gltf.scene;
 
