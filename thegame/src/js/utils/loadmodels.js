@@ -2,6 +2,15 @@ import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {RGBELoader} from 'three/addons/loaders/RGBELoader.js';
 import {basePath, camera, renderer, scene, teleportgroup} from '../main.js';
+
+async function loadModel(loader, modelPath, position) {
+	loader.load(modelPath, async function (gltf) {
+		const model = gltf.scene;
+		model.position.set(...position);
+		scene.add(model);
+		await renderer.compileAsync(model, camera, scene);
+	});
+}
 export function loadmodels() {
 	new RGBELoader().setPath(basePath).load('hdr/Scenery.hdr', function (texture) {
 		texture.mapping = THREE.EquirectangularReflectionMapping;
@@ -10,34 +19,11 @@ export function loadmodels() {
 		scene.environment = texture;
 		renderer.toneMappingExposure = 10.0;
 		const loader = new GLTFLoader().setPath(basePath);
-		loader.load('floors/7thfloor/7thfloor.gltf', async function (gltf) {
-			const model = gltf.scene;
+		loadModel(loader, 'floors/7thfloor/7thfloor.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/7thfloor/7thwalls.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/7thfloor/7thdoors.gltf', [0, 0, 0]);
+		loadModel(loader, 'objects/kitchen/kitchen.gltf', [0, 0, 0]);
 
-			model.position.set(0, 0, 0);
-			teleportgroup.add(model);
-			await renderer.compileAsync(model, camera, scene);
-		});
-		loader.load('floors/7thfloor/7thwalls.gltf', async function (gltf) {
-			const model = gltf.scene;
-
-			model.position.set(0, 0, 0);
-			scene.add(model);
-			await renderer.compileAsync(model, camera, scene);
-		});
-		loader.load('floors/7thfloor/7thdoors.gltf', async function (gltf) {
-			const model = gltf.scene;
-
-			model.position.set(0, 0, 0);
-			scene.add(model);
-			await renderer.compileAsync(model, camera, scene);
-		});
-		loader.load('objects/kitchen/kitchen.gltf', async function (gltf) {
-			const model = gltf.scene;
-
-			model.position.set(0, 0, 0);
-			scene.add(model);
-			await renderer.compileAsync(model, camera, scene);
-		});
 		// loader.load('objects/tuoli/tuoli.gltf', async function (gltf) {
 		// 	const model = gltf.scene;
 
