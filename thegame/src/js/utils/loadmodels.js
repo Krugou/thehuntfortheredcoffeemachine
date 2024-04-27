@@ -3,11 +3,15 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {RGBELoader} from 'three/addons/loaders/RGBELoader.js';
 import {basePath, camera, renderer, scene, teleportgroup} from '../main.js';
 
-async function loadModel(loader, modelPath, position) {
+async function loadModel(loader, modelPath, position, teleportgroup) {
 	loader.load(modelPath, async function (gltf) {
 		const model = gltf.scene;
 		model.position.set(...position);
-		scene.add(model);
+		if (teleportgroup) {
+			teleportgroup.add(model);
+		} else {
+			scene.add(model);
+		}
 		await renderer.compileAsync(model, camera, scene);
 	});
 }
@@ -19,7 +23,7 @@ export function loadmodels() {
 		scene.environment = texture;
 		renderer.toneMappingExposure = 10.0;
 		const loader = new GLTFLoader().setPath(basePath);
-		loadModel(loader, 'floors/7thfloor/7thfloor.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/7thfloor/7thfloor.gltf', [0, 0, 0], true);
 		loadModel(loader, 'floors/7thfloor/7thwalls.gltf', [0, 0, 0]);
 		loadModel(loader, 'floors/7thfloor/7thdoors.gltf', [0, 0, 0]);
 		loadModel(loader, 'objects/kitchen/kitchen.gltf', [0, 0, 0]);
