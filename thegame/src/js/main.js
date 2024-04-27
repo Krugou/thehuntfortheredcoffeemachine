@@ -1,19 +1,13 @@
 import * as THREE from 'three';
-import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {RGBELoader} from 'three/addons/loaders/RGBELoader.js';
 import {VRButton} from 'three/addons/webxr/VRButton.js';
-import {XRControllerModelFactory} from 'three/addons/webxr/XRControllerModelFactory.js';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import {animate} from '/js/utils/animate.js';
-import {cleanIntersected} from '/js/utils/cleanIntersected.js';
-import {getIntersections} from '/js/utils/getIntersections.js';
-import {loadGripModel} from '/js/utils/gripModel.js';
+import {configureControllers} from '/js/utils/configureControllers';
 import {loadmodels} from '/js/utils/loadmodels.js';
 import {onSelectEnd} from '/js/utils/onSelectEnd.js';
 import {onSelectStart} from '/js/utils/onSelectStart.js';
 import {resize} from '/js/utils/resize.js';
 import {onSqueezeEnd, onSqueezeStart} from '/js/utils/squeeze.js';
-
 export let basePath = '/';
 export let directionalLight;
 export let interactionGroup = new THREE.Group();
@@ -56,7 +50,7 @@ export function start() {
 	// Create a new THREE.WebGLRenderer object
 	renderer = new THREE.WebGLRenderer({antialias: true});
 	renderer.setSize(window.innerWidth, window.innerHeight);
-	renderer.shadowMap.enabled = true;
+	// renderer.shadowMap.enabled = true;
 
 	container.appendChild(renderer.domElement);
 
@@ -64,8 +58,9 @@ export function start() {
 	directionalLight = new THREE.DirectionalLight(0xffffff, 2);
 	scene.add(directionalLight);
 
-	// // Add an axes helper to the scene
-	const axesHelper = new THREE.AxesHelper(5);
+	// Add an axes helper to the scene
+	const axesHelper = new THREE.AxesHelper(4);
+	axesHelper.position.set(-4, 0, -15);
 	scene.add(axesHelper);
 
 	// Add ambient light to the scene
@@ -73,15 +68,12 @@ export function start() {
 	scene.add(light);
 
 	// Set the camera's position and look at the axes helper
-	camera.position.set(2, 2, 2);
-	camera.lookAt(axesHelper.position);
-	camera.lookAt(new THREE.Vector3(0, 0, 0));
+	camera.position.set(-4, 4, -14);
+	// camera.lookAt(axesHelper.position);
 
 	// Create new OrbitControls
 	controls = new OrbitControls(camera, renderer.domElement);
 
-	// Update the controls after any manual changes to the camera's transform
-	camera.position.set(7, 2, 6);
 	controls.update();
 	scene.add(interactionGroup);
 
@@ -92,9 +84,18 @@ export function start() {
 initVR();
 marker = new THREE.Mesh(
 	new THREE.CircleGeometry(0.25, 32).rotateX(-Math.PI / 2),
-	new THREE.MeshBasicMaterial({color: 0x2c2c2c}),
+	new THREE.MeshBasicMaterial({color: 0x404040}),
 );
 scene.add(marker);
+
+// start location on vr start
+const startLocation = {
+	x: 2,
+	y: 0,
+	z: 16,
+	w: 1,
+};
+export const startRotation = new THREE.Quaternion();
 /**
  * Initializes the VR environment.
  */
@@ -103,10 +104,12 @@ export function initVR() {
 	document.body.appendChild(VRButton.createButton(renderer));
 
 	renderer.xr.enabled = true;
-	renderer.xr.addEventListener(
-		'sessionstart',
-		() => (baseReferenceSpace = renderer.xr.getReferenceSpace()),
-	);
+	renderer.xr.addEventListener('sessionstart', () => {
+		baseReferenceSpace = renderer.xr.getReferenceSpace();
+		const transform = new XRRigidTransform(startLocation, startRotation);
+		const beginningSpot = baseReferenceSpace.getOffsetReferenceSpace(transform);
+		renderer.xr.setReferenceSpace(beginningSpot);
+	});
 
 	// Create and configure the first controller
 	controller1 = renderer.xr.getController(0);
@@ -124,42 +127,12 @@ export function initVR() {
 	// Add the controller to the scene
 	scene.add(controller2);
 
-	// Create a factory for controller models
-	const controllerModelFactory = new XRControllerModelFactory();
-
-	// Create and configure the grip for the first controller
-	controllerGrip1 = renderer.xr.getControllerGrip(0);
-	// Add a model to the grip
-	// controllerGrip1.add(
-	// 	controllerModelFactory.createControllerModel(controllerGrip1),
-	// );
-	// Add the grip to the scene
-	scene.add(controllerGrip1);
-
-	// Create and configure the grip for the second controller
-	controllerGrip2 = renderer.xr.getControllerGrip(1);
-	// Add a model to the grip
-	// controllerGrip2.add(
-	// 	controllerModelFactory.createControllerModel(controllerGrip2),
-	// );
-	scene.add(controllerGrip2);
-	loadGripModel(controllerGrip1, controllerGrip2);
-
-	// Create a line geometry
-	const geometry = new THREE.BufferGeometry().setFromPoints([
-		new THREE.Vector3(0, 0, 0),
-		new THREE.Vector3(0, 0, -1),
-	]);
-
-	// Create a line using the geometry
-	const line = new THREE.Line(geometry);
-	line.name = 'line';
-	line.scale.z = 5;
-
-	// Add a clone of the line to each controller
-	controller1.add(line.clone());
-	controller2.add(line.clone());
-
+	configureControllers(
+		controller1,
+		controller2,
+		controllerGrip1,
+		controllerGrip2,
+	);
 	// Create a raycaster
 	raycaster = new THREE.Raycaster();
 

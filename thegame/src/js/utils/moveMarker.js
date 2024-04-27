@@ -16,8 +16,6 @@ export function moveMarker() {
 		const intersects = raycaster.intersectObjects(teleportgroup.children, true);
 		if (intersects.length > 0) {
 			INTERSECTION = intersects[0].point;
-			console.log(intersects[0]);
-			console.log(INTERSECTION);
 		}
 	} else if (controller2.userData.isSqueezing === true) {
 		tempMatrix.identity().extractRotation(controller2.matrixWorld);

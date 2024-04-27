@@ -3,12 +3,11 @@
 		"browser": true,
 		"es2021": true
 	},
-	"extends": ["eslint:recommended", "plugin:html/recommended"],
+	"extends": "eslint:recommended",
 	"parserOptions": {
 		"ecmaVersion": 2021,
 		"sourceType": "module"
 	},
-	"plugins": ["html"],
 	"rules": {
 		// Add any additional rules or overrides here
 	}

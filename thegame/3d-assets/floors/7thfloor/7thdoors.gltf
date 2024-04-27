@@ -47,7 +47,7 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":5320,
+			"count":5328,
 			"max":[
 				388.44091796875,
 				2.9932427406311035,
@@ -63,13 +63,13 @@
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":5320,
+			"count":5328,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":5320,
+			"count":5328,
 			"type":"VEC2"
 		},
 		{
@@ -82,32 +82,32 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":63840,
+			"byteLength":63936,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":63840,
-			"byteOffset":63840,
+			"byteLength":63936,
+			"byteOffset":63936,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":42560,
-			"byteOffset":127680,
+			"byteLength":42624,
+			"byteOffset":127872,
 			"target":34962
 		},
 		{
 			"buffer":0,
 			"byteLength":19680,
-			"byteOffset":170240,
+			"byteOffset":170496,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":189920,
+			"byteLength":190176,
 			"uri":"7thdoors.bin"
 		}
 	]
