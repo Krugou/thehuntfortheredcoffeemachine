@@ -13,8 +13,10 @@ export let directionalLight;
 export let interactionGroup = new THREE.Group();
 interactionGroup.name = 'Interaction-Group';
 export let marker, baseReferenceSpace;
-export let teleportgroup = new THREE.Group();
-teleportgroup.name = 'Teleport-Group';
+export let teleportGroup = new THREE.Group();
+teleportGroup.name = 'Teleport-Group';
+export let noTeleportGroup = new THREE.Group();
+noTeleportGroup.name = 'NoTeleport-Group';
 export let controller1, controller2;
 export let controllerGrip1, controllerGrip2;
 export let raycaster;
@@ -36,9 +38,10 @@ export function start() {
 
 	// Create a new THREE.Scene object
 	scene = new THREE.Scene();
-
+	scene.add(teleportGroup);
+	scene.add(noTeleportGroup);
 	loadmodels();
-	scene.add(teleportgroup);
+
 	// Create a new THREE.PerspectiveCamera object
 	camera = new THREE.PerspectiveCamera(
 		75, // Field of view
@@ -68,7 +71,7 @@ export function start() {
 	scene.add(light);
 
 	// Set the camera's position and look at the axes helper
-	camera.position.set(-4, 4, -14);
+	camera.position.set(-4, 4, 0);
 	// camera.lookAt(axesHelper.position);
 
 	// Create new OrbitControls
@@ -92,7 +95,7 @@ scene.add(marker);
 const startLocation = {
 	x: 2,
 	y: 0,
-	z: 16,
+	z: 0,
 	w: 1,
 };
 export const startRotation = new THREE.Quaternion();

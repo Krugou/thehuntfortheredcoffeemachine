@@ -5,21 +5,22 @@ import {
 	basePath,
 	camera,
 	interactionGroup,
+	noTeleportGroup,
 	renderer,
 	scene,
-	teleportgroup,
+	teleportGroup,
 } from '../main.js';
 
 async function loadModel(loader, modelPath, position, teleportEnabled = false) {
 	loader.load(modelPath, async function (gltf) {
 		const model = gltf.scene;
 		model.position.set(...position);
-		if (teleportEnabled) {
+		if (teleportEnabled && modelPath.includes('floor')) {
 			console.log('teleport');
-			teleportgroup.add(model);
+			teleportGroup.add(model);
 		} else {
-			console.log('scene');
-			scene.add(model);
+			console.log('noTeleport');
+			noTeleportGroup.add(model);
 		}
 		await renderer.compileAsync(model, camera, scene);
 	});
