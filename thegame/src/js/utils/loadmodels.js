@@ -3,11 +3,11 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {RGBELoader} from 'three/addons/loaders/RGBELoader.js';
 import {basePath, camera, renderer, scene, teleportgroup} from '../main.js';
 
-async function loadModel(loader, modelPath, position, teleportgroup) {
+async function loadModel(loader, modelPath, position, teleportEnabled = false) {
 	loader.load(modelPath, async function (gltf) {
 		const model = gltf.scene;
 		model.position.set(...position);
-		if (teleportgroup) {
+		if (teleportEnabled) {
 			teleportgroup.add(model);
 		} else {
 			scene.add(model);
