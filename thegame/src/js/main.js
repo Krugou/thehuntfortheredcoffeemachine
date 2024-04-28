@@ -25,9 +25,8 @@ export const tempMatrix = new THREE.Matrix4();
 export let container, camera, scene, renderer, cube, controls;
 export let lastLoggedPosition = null;
 export let model2;
-
+export let startfloor, lowerfloor, middlefloor, topfloor;
 start();
-
 /**
  * Initializes the 3D scene, camera, renderer, and objects.
  */
@@ -40,7 +39,7 @@ export function start() {
 	scene = new THREE.Scene();
 	scene.add(teleportGroup);
 	scene.add(noTeleportGroup);
-	loadmodels();
+	loadmodels('7th-floor');
 
 	// Create a new THREE.PerspectiveCamera object
 	camera = new THREE.PerspectiveCamera(
@@ -69,6 +68,7 @@ export function start() {
 	// Add ambient light to the scene
 	const light = new THREE.AmbientLight(0x404040); // soft white light
 	scene.add(light);
+	scene.add(interactionGroup);
 
 	// Set the camera's position and look at the axes helper
 	camera.position.set(-4, 4, 0);
@@ -78,18 +78,11 @@ export function start() {
 	controls = new OrbitControls(camera, renderer.domElement);
 
 	controls.update();
-	scene.add(interactionGroup);
+	document.body.appendChild(VRButton.createButton(renderer));
 
 	// Call the animate export function to start the animation loop
 	animate();
 }
-
-initVR();
-marker = new THREE.Mesh(
-	new THREE.CircleGeometry(0.25, 32).rotateX(-Math.PI / 2),
-	new THREE.MeshBasicMaterial({color: 0x404040}),
-);
-scene.add(marker);
 
 // start location on vr start
 const startLocation = {
@@ -102,10 +95,14 @@ export const startRotation = new THREE.Quaternion();
 /**
  * Initializes the VR environment.
  */
-export function initVR() {
+startVR();
+export function startVR() {
 	// Enable WebXR in the renderer
-	document.body.appendChild(VRButton.createButton(renderer));
-
+	marker = new THREE.Mesh(
+		new THREE.CircleGeometry(0.25, 32).rotateX(-Math.PI / 2),
+		new THREE.MeshBasicMaterial({color: 0x404040}),
+	);
+	scene.add(marker);
 	renderer.xr.enabled = true;
 	renderer.xr.addEventListener('sessionstart', () => {
 		baseReferenceSpace = renderer.xr.getReferenceSpace();
@@ -144,6 +141,7 @@ export function initVR() {
 
 	controller2.addEventListener('squeezestart', onSqueezeStart);
 	controller2.addEventListener('squeezeend', onSqueezeEnd);
+	
 }
 
 window.addEventListener('resize', resize, false);

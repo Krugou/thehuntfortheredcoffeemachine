@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {basePath, controllerGrip1, controllerGrip2} from '../main.js'; // assuming GLTFLoader and THREE are exported from main.js
+import {basePath} from '../main.js'; // assuming GLTFLoader and THREE are exported from main.js
 export function loadGripModel(controllerGrip1, controllerGrip2) {
 	const loader = new GLTFLoader().setPath(basePath);
 	loader.load('low_poly_blue_handgun_pistol/scene.gltf', function (gltf) {

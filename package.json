@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "npm i && cd thegame && npm start",
+		"dev": "npm i && cd thegame && npm run dev",
 		"build": "npm i && cd thegame && npm run build",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
