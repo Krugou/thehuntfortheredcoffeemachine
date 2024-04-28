@@ -24,8 +24,8 @@ export function animate() {
 		controls.update();
 
 		if (directionalLight) {
-			directionalLight.position.x = Math.sin(clock.getElapsedTime()) * 0.02;
-			directionalLight.position.z = Math.cos(clock.getElapsedTime()) * 0.02;
+			// directionalLight.position.x = Math.sin(clock.getElapsedTime()) * 0.02;
+			// directionalLight.position.z = Math.cos(clock.getElapsedTime()) * 0.02;
 		}
 
 		renderer.render(scene, camera);
