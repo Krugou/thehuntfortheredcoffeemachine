@@ -127,7 +127,7 @@ export function loadmodels(target) {
 				const clonedModel = model.clone();
 				// clonedModel.position.z += 2.75; // adjust the value as needed
 				clonedModel.position.set(0, 0, 0);
-				clonedModel.children[0].name = '7th-floor';
+				clonedModel.children[0].name = '2th-floor';
 				console.log(clonedModel);
 				interactionGroup.add(clonedModel);
 
@@ -146,6 +146,15 @@ export function loadmodels(target) {
 				const anotherClonedModel = clonedModel.clone();
 				anotherClonedModel.position.z -= 2.75; // adjust the value as needed
 				scene.add(anotherClonedModel);
+				await renderer.compileAsync(model, camera, scene);
+			});
+
+			loader.load('objects/tuoli/tuoli.gltf', async function (gltf) {
+				const model = gltf.scene;
+
+				model.position.set(-8, 0, 10);
+
+				scene.add(model);
 				await renderer.compileAsync(model, camera, scene);
 			});
 		});
