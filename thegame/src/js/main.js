@@ -39,7 +39,7 @@ export function start() {
 	scene = new THREE.Scene();
 	scene.add(teleportGroup);
 	scene.add(noTeleportGroup);
-	loadmodels('7th-floor');
+	loadmodels('2th-floor');
 
 	// Create a new THREE.PerspectiveCamera object
 	camera = new THREE.PerspectiveCamera(
