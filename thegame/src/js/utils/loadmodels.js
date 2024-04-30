@@ -151,7 +151,8 @@ export function loadmodels(target) {
 			loadModel(loader, 'floors/2ndfloor/2thfloor.gltf', [0, 0, 0], true);
 			loadModel(loader, 'floors/2ndfloor/2thwalls.gltf', [0, 0, 0]);
 			loadModel(loader, 'floors/2ndfloor/2thdoors.gltf', [0, 0, 0]);
-			// loadModel(loader, 'floors/6thfloor/extraStuff.gltf', [0, 0, 0]);
+			loadModel(loader, 'floors/2ndfloor/2thlockers.gltf', [0, 0, 0]);
+			loadModel(loader, 'floors/2ndfloor/2thpillars.gltf', [0, 0, 0]);
 			loadModel(loader, 'floors/2ndfloor/2thOutsideDoors.gltf', [0, 0, 0]);
 
 			// loader.load('objects/tuoli/tuoli.gltf', async function (gltf) {
