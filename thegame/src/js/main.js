@@ -93,16 +93,13 @@ export function start() {
 // 	w: 1,
 // };
 const startLocation = {
-	x: 9,
+	x: 15,
 	y: 0,
-	z: 1,
+	z: 30,
 	w: 1,
 };
 
-export const startRotation = new THREE.Quaternion().setFromAxisAngle(
-	new THREE.Vector3(0, 1, 0),
-	Math.PI,
-);
+export const startRotation = new THREE.Quaternion();
 // startlocation tester
 // // Create a cube geometry
 // const geometry2 = new THREE.BoxGeometry(1, 1, 1);
