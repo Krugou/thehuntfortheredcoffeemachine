@@ -230,10 +230,10 @@ export function loadmodels(target) {
 			renderer.toneMappingExposure = 10.0;
 			const loader = new GLTFLoader().setPath(basePath);
 			loadModel(loader, 'floors/5thfloor/5thfloor.gltf', [0, 0, 0], true);
-			// loadModel(loader, 'floors/5thfloor/5thwalls.gltf', [0, 0, 0]);
+			loadModel(loader, 'floors/5thfloor/5thwalls.gltf', [0, 0, 0]);
 			// loadModel(loader, 'floors/5thfloor/5thdoors.gltf', [0, 0, 0]);
 			// loadModel(loader, 'floors/5thfloor/extraStuff.gltf', [0, 0, 0]);
-			loadModel(loader, 'objects/kitchen/kitchen.gltf', [0, 0, 0]);
+			loadModel(loader, 'objects/kitchen/kitchen.gltf', [-0.1, 0, -1.1]);
 
 			// loader.load('objects/tuoli/tuoli.gltf', async function (gltf) {
 			// 	const model = gltf.scene;
@@ -265,14 +265,14 @@ export function loadmodels(target) {
 			loader.load('objects/hissi/hissi.gltf', async function (gltf) {
 				const model = gltf.scene;
 
-				model.position.set(0, 0, 0);
+				model.position.set(0, 0, 1.5);
 
 				scene.add(model);
 				const clonedModel = model.clone();
-				clonedModel.position.z -= 2.75; // adjust the value as needed
+				clonedModel.position.z -= 2.5; // adjust the value as needed
 				scene.add(clonedModel);
 				const anotherClonedModel = clonedModel.clone();
-				anotherClonedModel.position.z -= 2.75; // adjust the value as needed
+				anotherClonedModel.position.z -= 2.5; // adjust the value as needed
 				scene.add(anotherClonedModel);
 				await renderer.compileAsync(model, camera, scene);
 			});
