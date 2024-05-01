@@ -45,18 +45,25 @@ export function loadmodels(target) {
 			loadModel(loader, 'floors/2ndfloor/2thpillars.gltf', [0, 0, 0]);
 			loadModel(loader, 'floors/2ndfloor/2thOutsideDoors.gltf', [0, 0, 0]);
 
-			// loader.load('objects/sohva/sohva.gltf', async function (gltf) {
-			// 	const model = gltf.scene;
-			// 	// x-axis (left/right), y-axis (up/down), z-axis (forward/backward)
+			loader.load('objects/sohva/sohva.gltf', async function (gltf) {
+			const model = gltf.scene;
+			model.scale.set(0.5, 0.5, 0.5);
+			model.rotation.set(0, 3.15, 0);
+			model.position.set(3, 0.2, -4);
+			noTeleportGroup.add(model);
 
-			// 	model.position.set(3, -0.5, -4);
-			// 	model.rotation.set(0, 3.1, 0.05);
-			// 	noTeleportGroup.add(model);
-			// 	// const clonedModel = model.clone();
-			// 	// clonedModel.position.z += 2.75; // adjust the value as needed
+				const clonedModel = model.clone();
+				clonedModel.position.set(-3, 0.2, -4);
+				clonedModel.rotation.set(0, 0, 0);
+				noTeleportGroup.add(clonedModel);
 
-			// 	await renderer.compileAsync(model, camera, scene);
-			// });
+				const anotherClonedModel = model.clone();
+				anotherClonedModel.position.set(0, 0.2, 0);
+				anotherClonedModel.rotation.set(0, 1.6, 0);
+				noTeleportGroup.add(anotherClonedModel);
+
+			await renderer.compileAsync(model, camera, scene);
+			});
 
 			loader.load('objects/smalldesk/smalldesk.gltf', async function (gltf) {
 				const model = gltf.scene;
@@ -115,14 +122,15 @@ export function loadmodels(target) {
 				await renderer.compileAsync(model, camera, scene);
 			});
 
-			// loader.load('objects/tuoli/tuoli.gltf', async function (gltf) {
-			// 	const model = gltf.scene;
+			loader.load('objects/tuoli/tuoli.gltf', async function (gltf) {
+			const model = gltf.scene;
 
-			// 	model.position.set(-8, 0, 10);
+			model.position.set(-8, 0, 11);
+			model.scale.set(0.4, 0.4, 0.4);
 
-			// 	noTeleportGroup.add(model);
-			// 	await renderer.compileAsync(model, camera, scene);
-			// });
+			noTeleportGroup.add(model);
+			await renderer.compileAsync(model, camera, scene);
+			});
 		});
 	}
 	if (target === '5th-floor') {
