@@ -81,7 +81,7 @@ export function loadmodels(target) {
 			loader.load('objects/hissi/hissi.gltf', async function (gltf) {
 				const model = gltf.scene;
 
-				model.position.set(15, 0, 17);
+				model.position.set(0, 0, 0);
 
 				noTeleportGroup.add(model);
 				const clonedModel = model.clone();
@@ -95,7 +95,7 @@ export function loadmodels(target) {
 			loader.load('objects/hissi/hissidown.gltf', async function (gltf) {
 				const model = gltf.scene;
 
-				model.position.set(15, 0, 17);
+				model.position.set(0, 0, 0);
 
 				noTeleportGroup.add(model);
 				const clonedModel = model.clone();
@@ -109,7 +109,7 @@ export function loadmodels(target) {
 			loader.load('objects/hissi/hissiup.gltf', async function (gltf) {
 				const model = gltf.scene;
 
-				model.position.set(15, 0, 17);
+				model.position.set(0, 0, 0);
 
 				const clonedModel = model.clone();
 				clonedModel.position.z -= 2.75; // adjust the value as needed
