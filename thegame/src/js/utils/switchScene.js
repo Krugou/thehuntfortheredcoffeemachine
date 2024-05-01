@@ -25,8 +25,9 @@ export function switchScene(targetScene) {
 		scene.remove(object);
 	}
 	// choose the starting location based on the target scene
-	let startRotation = new THREE.Quaternion();
 	let startLocation;
+	let startRotation;
+
 	switch (targetScene) {
 		case '2nd-floor':
 			startLocation = {
@@ -35,6 +36,10 @@ export function switchScene(targetScene) {
 				z: 0,
 				w: 1,
 			};
+			startRotation = new THREE.Quaternion().setFromAxisAngle(
+				new THREE.Vector3(0, 1, 0),
+				Math.PI,
+			);
 			break;
 		case '5th-floor':
 			startLocation = {
@@ -43,6 +48,10 @@ export function switchScene(targetScene) {
 				z: 0,
 				w: 1,
 			};
+			startRotation = new THREE.Quaternion().setFromAxisAngle(
+				new THREE.Vector3(0, 1, 0),
+				Math.PI / 2,
+			);
 			break;
 		case '6th-floor':
 			startLocation = {
@@ -51,6 +60,10 @@ export function switchScene(targetScene) {
 				z: 0,
 				w: 1,
 			};
+			startRotation = new THREE.Quaternion().setFromAxisAngle(
+				new THREE.Vector3(0, 1, 0),
+				Math.PI / 3,
+			);
 			break;
 		case '7th-floor':
 			startLocation = {
@@ -59,6 +72,10 @@ export function switchScene(targetScene) {
 				z: 0,
 				w: 1,
 			};
+			startRotation = new THREE.Quaternion().setFromAxisAngle(
+				new THREE.Vector3(0, 1, 0),
+				Math.PI / 4,
+			);
 			break;
 		default:
 			startLocation = {
@@ -67,6 +84,10 @@ export function switchScene(targetScene) {
 				z: 0,
 				w: 1,
 			};
+			startRotation = new THREE.Quaternion().setFromAxisAngle(
+				new THREE.Vector3(0, 1, 0),
+				Math.PI,
+			);
 	}
 
 	// Set the reference space

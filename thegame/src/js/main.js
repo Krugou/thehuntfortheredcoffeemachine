@@ -86,13 +86,34 @@ export function start() {
 
 // start location on vr start
 const startLocation = {
-	x: -1,
+	x: -5,
 	y: 0,
-	z: 0,
+	z: -13,
 	w: 1,
 };
-export const startRotation = new THREE.Quaternion();
 
+export const startRotation = new THREE.Quaternion().setFromAxisAngle(
+	new THREE.Vector3(0, 1, 0),
+	Math.PI,
+);
+
+// Create a cube geometry
+const geometry2 = new THREE.BoxGeometry(1, 1, 1);
+
+// Create a basic material
+const material2 = new THREE.MeshBasicMaterial({color: 0x00ff00});
+
+// Create a cube mesh
+const cube2 = new THREE.Mesh(geometry2, material2);
+
+// Set the cube's position to the start location
+cube2.position.set(startLocation.x, startLocation.y, startLocation.z);
+
+// Set the cube's rotation to the start rotation
+cube2.setRotationFromQuaternion(startRotation);
+
+// Add the cube to the scene
+scene.add(cube2);
 /**
  * Initializes the VR environment.
  */
