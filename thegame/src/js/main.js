@@ -141,7 +141,6 @@ export function startVR() {
 
 	controller2.addEventListener('squeezestart', onSqueezeStart);
 	controller2.addEventListener('squeezeend', onSqueezeEnd);
-	
 }
 
 window.addEventListener('resize', resize, false);

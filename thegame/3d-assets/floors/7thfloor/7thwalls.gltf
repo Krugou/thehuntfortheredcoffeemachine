@@ -70,10 +70,10 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":4344,
+			"count":5496,
 			"max":[
 				306.9310302734375,
-				3.000678539276123,
+				3.008476495742798,
 				159.543212890625
 			],
 			"min":[
@@ -86,51 +86,51 @@
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":4344,
+			"count":5496,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":4344,
+			"count":5496,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":8826,
+			"count":10572,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":52128,
+			"byteLength":65952,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":52128,
-			"byteOffset":52128,
+			"byteLength":65952,
+			"byteOffset":65952,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":34752,
-			"byteOffset":104256,
+			"byteLength":43968,
+			"byteOffset":131904,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":17652,
-			"byteOffset":139008,
+			"byteLength":21144,
+			"byteOffset":175872,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":156660,
+			"byteLength":197016,
 			"uri":"7thwalls.bin"
 		}
 	]
