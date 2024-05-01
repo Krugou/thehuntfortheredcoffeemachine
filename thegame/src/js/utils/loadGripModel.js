@@ -5,8 +5,8 @@ export function loadGripModel(controllerGrip1, controllerGrip2) {
 	const loader = new GLTFLoader().setPath(basePath);
 	loader.load('low_poly_blue_handgun_pistol/scene.gltf', function (gltf) {
 		gltf.scene.scale.set(0.1003, 0.1003, 0.1003);
-
 		let mymodel = gltf.scene;
+		mymodel.name = 'gripModel';
 		mymodel.rotation.y = THREE.MathUtils.degToRad(-90);
 		mymodel.rotation.x = THREE.MathUtils.degToRad(-30);
 

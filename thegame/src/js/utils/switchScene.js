@@ -7,6 +7,7 @@ export function switchScene(targetScene) {
 	// Clear the current scene
 	for (let i = scene.children.length - 1; i >= 0; i--) {
 		const object = scene.children[i];
+		console.log('🚀 ~ switchScene ~ object:', object);
 		// Skip if the object is a light or an AxesHelper
 		if (object instanceof THREE.Light || object instanceof THREE.AxesHelper) {
 			continue;
@@ -22,78 +23,42 @@ export function switchScene(targetScene) {
 			}
 			continue;
 		}
-		scene.remove(object);
 	}
 	// choose the starting location based on the target scene
 	let startLocation;
-	let startRotation;
+	let startRotation = new THREE.Quaternion();
 
+	// switch (targetScene) {
+	// 	case '2nd-floor':
+	// 		startLocation = {x: -12, y: 0, z: -17, w: 1};
+	// 		break;
+	// 	case '5th-floor':
+	// 	case '6th-floor':
+	// 	case '7th-floor':
+	// 		startLocation = {x: 13, y: 0, z: 10, w: 1};
+	// 		break;
+	// 	default:
+	// 		startLocation = {x: -4, y: 0, z: -13, w: 1};
+	// }
 	switch (targetScene) {
 		case '2nd-floor':
-			startLocation = {
-				x: 0,
-				y: 0,
-				z: 0,
-				w: 1,
-			};
-			startRotation = new THREE.Quaternion().setFromAxisAngle(
-				new THREE.Vector3(0, 1, 0),
-				Math.PI,
-			);
+			startLocation = {x: 0, y: 0, z: 0, w: 1};
 			break;
 		case '5th-floor':
-			startLocation = {
-				x: 0,
-				y: 0,
-				z: 0,
-				w: 1,
-			};
-			startRotation = new THREE.Quaternion().setFromAxisAngle(
-				new THREE.Vector3(0, 1, 0),
-				Math.PI / 2,
-			);
-			break;
 		case '6th-floor':
-			startLocation = {
-				x: 0,
-				y: 0,
-				z: 0,
-				w: 1,
-			};
-			startRotation = new THREE.Quaternion().setFromAxisAngle(
-				new THREE.Vector3(0, 1, 0),
-				Math.PI / 3,
-			);
-			break;
 		case '7th-floor':
-			startLocation = {
-				x: 0,
-				y: 0,
-				z: 0,
-				w: 1,
-			};
-			startRotation = new THREE.Quaternion().setFromAxisAngle(
-				new THREE.Vector3(0, 1, 0),
-				Math.PI / 4,
-			);
+			startLocation = {x: 0, y: 0, z: 0, w: 1};
 			break;
 		default:
-			startLocation = {
-				x: -1,
-				y: 0,
-				z: 0,
-				w: 1,
-			};
-			startRotation = new THREE.Quaternion().setFromAxisAngle(
-				new THREE.Vector3(0, 1, 0),
-				Math.PI,
-			);
+			startLocation = {x: 0, y: 0, z: 0, w: 1};
 	}
-
 	// Set the reference space
 	const baseReferenceSpace = renderer.xr.getReferenceSpace();
+	console.log('🚀 ~ switchScene ~ baseReferenceSpace:', baseReferenceSpace);
 	const transform = new XRRigidTransform(startLocation, startRotation);
+	console.log('🚀 ~ switchScene ~ transform:', transform);
 	const beginningSpot = baseReferenceSpace.getOffsetReferenceSpace(transform);
+	console.log('🚀 ~ switchScene ~ beginningSpot:', beginningSpot);
 	renderer.xr.setReferenceSpace(beginningSpot);
 	setTimeout(() => loadmodels(targetScene), 100);
 }

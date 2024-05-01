@@ -26,7 +26,7 @@ async function loadModel(loader, modelPath, position, teleportEnabled = false) {
 	});
 }
 export function loadmodels(target) {
-	if (target === '2th-floor') {
+	if (target === '2nd-floor') {
 		new RGBELoader().setPath(basePath).load('hdr/office.hdr', function (texture) {
 			texture.mapping = THREE.EquirectangularReflectionMapping;
 
@@ -46,11 +46,11 @@ export function loadmodels(target) {
 			loadModel(loader, 'floors/2ndfloor/2thOutsideDoors.gltf', [0, 0, 0]);
 
 			loader.load('objects/sohva/sohva.gltf', async function (gltf) {
-			const model = gltf.scene;
-			model.scale.set(0.5, 0.5, 0.5);
-			model.rotation.set(0, 3.15, 0);
-			model.position.set(3, 0.2, -4);
-			noTeleportGroup.add(model);
+				const model = gltf.scene;
+				model.scale.set(0.5, 0.5, 0.5);
+				model.rotation.set(0, 3.15, 0);
+				model.position.set(3, 0.2, -4);
+				noTeleportGroup.add(model);
 
 				const clonedModel = model.clone();
 				clonedModel.position.set(-3, 0.2, -4);
@@ -62,7 +62,7 @@ export function loadmodels(target) {
 				anotherClonedModel.rotation.set(0, 1.6, 0);
 				noTeleportGroup.add(anotherClonedModel);
 
-			await renderer.compileAsync(model, camera, scene);
+				await renderer.compileAsync(model, camera, scene);
 			});
 
 			loader.load('objects/smalldesk/smalldesk.gltf', async function (gltf) {
@@ -123,13 +123,13 @@ export function loadmodels(target) {
 			});
 
 			loader.load('objects/tuoli/tuoli.gltf', async function (gltf) {
-			const model = gltf.scene;
+				const model = gltf.scene;
 
-			model.position.set(-8, 0, 11);
-			model.scale.set(0.4, 0.4, 0.4);
+				model.position.set(-8, 0, 11);
+				model.scale.set(0.4, 0.4, 0.4);
 
-			noTeleportGroup.add(model);
-			await renderer.compileAsync(model, camera, scene);
+				noTeleportGroup.add(model);
+				await renderer.compileAsync(model, camera, scene);
 			});
 		});
 	}
@@ -192,9 +192,9 @@ export function loadmodels(target) {
 				anotherClonedModel.position.z -= 2.5; // adjust the value as needed
 
 				await renderer.compileAsync(model, camera, scene);
-				model.children[0].name = '2th-floor';
-				clonedModel.children[0].name = '2th-floor';
-				anotherClonedModel.children[0].name = '2th-floor';
+				model.children[0].name = '2nd-floor';
+				clonedModel.children[0].name = '2nd-floor';
+				anotherClonedModel.children[0].name = '2nd-floor';
 				interactionGroup.add(model, clonedModel, anotherClonedModel);
 			});
 		});

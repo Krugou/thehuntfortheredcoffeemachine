@@ -26,7 +26,9 @@ export let container, camera, scene, renderer, cube, controls;
 export let lastLoggedPosition = null;
 export let model2;
 export let startfloor, lowerfloor, middlefloor, topfloor;
+
 start();
+startVR();
 /**
  * Initializes the 3D scene, camera, renderer, and objects.
  */
@@ -39,14 +41,14 @@ export function start() {
 	scene = new THREE.Scene();
 	scene.add(teleportGroup);
 	scene.add(noTeleportGroup);
-	loadmodels('2th-floor');
+	loadmodels('2nd-floor');
 
 	// Create a new THREE.PerspectiveCamera object
 	camera = new THREE.PerspectiveCamera(
-		75, // Field of view
+		70, // Field of view
 		window.innerWidth / window.innerHeight, // Aspect ratio
 		0.1, // Near clipping plane
-		20, // Far clipping plane
+		30, // Far clipping plane
 	);
 
 	// Create a new THREE.WebGLRenderer object
@@ -60,10 +62,10 @@ export function start() {
 	directionalLight = new THREE.DirectionalLight(0xffffff, 2);
 	scene.add(directionalLight);
 
-	// Add an axes helper to the scene
-	const axesHelper = new THREE.AxesHelper(4);
-	axesHelper.position.set(-4, 0, -15);
-	scene.add(axesHelper);
+	// // Add an axes helper to the scene
+	// const axesHelper = new THREE.AxesHelper(3);
+	// axesHelper.position.set(-4, 0, -15);
+	// scene.add(axesHelper);
 
 	// Add ambient light to the scene
 	const light = new THREE.AmbientLight(0x404040); // soft white light
@@ -71,8 +73,7 @@ export function start() {
 	scene.add(interactionGroup);
 
 	// Set the camera's position and look at the axes helper
-	camera.position.set(-4, 4, 0);
-	// camera.lookAt(axesHelper.position);
+	camera.position.set(0, 4, 0);
 
 	// Create new OrbitControls
 	controls = new OrbitControls(camera, renderer.domElement);
@@ -84,11 +85,17 @@ export function start() {
 	animate();
 }
 
-// start location on vr start
+// // start location on vr start
+// const startLocation = {
+// 	x: -5,
+// 	y: 0,
+// 	z: -13,
+// 	w: 1,
+// };
 const startLocation = {
-	x: -5,
+	x: 9,
 	y: 0,
-	z: -13,
+	z: 1,
 	w: 1,
 };
 
@@ -96,28 +103,27 @@ export const startRotation = new THREE.Quaternion().setFromAxisAngle(
 	new THREE.Vector3(0, 1, 0),
 	Math.PI,
 );
+// startlocation tester
+// // Create a cube geometry
+// const geometry2 = new THREE.BoxGeometry(1, 1, 1);
 
-// Create a cube geometry
-const geometry2 = new THREE.BoxGeometry(1, 1, 1);
+// // Create a basic material
+// const material2 = new THREE.MeshBasicMaterial({color: 0x00ff00});
 
-// Create a basic material
-const material2 = new THREE.MeshBasicMaterial({color: 0x00ff00});
+// // Create a cube mesh
+// const cube2 = new THREE.Mesh(geometry2, material2);
 
-// Create a cube mesh
-const cube2 = new THREE.Mesh(geometry2, material2);
+// // Set the cube's position to the start location
+// cube2.position.set(startLocation.x, startLocation.y, startLocation.z);
 
-// Set the cube's position to the start location
-cube2.position.set(startLocation.x, startLocation.y, startLocation.z);
+// // Set the cube's rotation to the start rotation
+// cube2.setRotationFromQuaternion(startRotation);
 
-// Set the cube's rotation to the start rotation
-cube2.setRotationFromQuaternion(startRotation);
-
-// Add the cube to the scene
-scene.add(cube2);
+// // Add the cube to the scene
+// scene.add(cube2);
 /**
  * Initializes the VR environment.
  */
-startVR();
 export function startVR() {
 	// Enable WebXR in the renderer
 	marker = new THREE.Mesh(
