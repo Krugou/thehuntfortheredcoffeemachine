@@ -1,5 +1,6 @@
 import {getIntersections} from './getIntersections.js';
 import {switchScene} from './switchScene.js';
+
 export function onSelectStart(event) {
 	console.log('onSelectStart');
 	const controller = event.target;
@@ -9,15 +10,23 @@ export function onSelectStart(event) {
 	if (intersections.length > 0) {
 		const intersection = intersections[0];
 		console.log('🚀 ~ onSelectStart ~ intersection:', intersection);
-		if (intersection.object.parent.name === '7th-floor') {
-			console.log('7th-floor');
-			switchScene('7th-floor');
-		}
-		const object = intersection.object;
-		object.material.emissive.b = 1;
-		controller.attach(object);
+		const objectName = intersection.object.parent.name;
 
-		controller.userData.selected = object;
+		switch (objectName) {
+			case '7th-floor':
+			case '2nd-floor':
+			case '5th-floor':
+			case '6th-floor':
+				console.log(objectName);
+				switchScene(objectName);
+				break;
+			default: {
+				const object = intersection.object;
+				object.material.emissive.b = 1;
+				controller.attach(object);
+				controller.userData.selected = object;
+			}
+		}
 	}
 
 	controller.userData.targetRayMode = event.data.targetRayMode;

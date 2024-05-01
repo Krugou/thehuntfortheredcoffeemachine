@@ -39,14 +39,14 @@ export function start() {
 	scene = new THREE.Scene();
 	scene.add(teleportGroup);
 	scene.add(noTeleportGroup);
-	loadmodels('5th-floor');
+	loadmodels('2th-floor');
 
 	// Create a new THREE.PerspectiveCamera object
 	camera = new THREE.PerspectiveCamera(
 		75, // Field of view
 		window.innerWidth / window.innerHeight, // Aspect ratio
 		0.1, // Near clipping plane
-		30, // Far clipping plane
+		20, // Far clipping plane
 	);
 
 	// Create a new THREE.WebGLRenderer object
@@ -86,12 +86,13 @@ export function start() {
 
 // start location on vr start
 const startLocation = {
-	x: 2,
+	x: -1,
 	y: 0,
 	z: 0,
 	w: 1,
 };
 export const startRotation = new THREE.Quaternion();
+
 /**
  * Initializes the VR environment.
  */

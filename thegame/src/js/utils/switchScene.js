@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {scene} from '../main';
+import {renderer, scene} from '../main';
 import {loadmodels} from './loadmodels';
 
 export function switchScene(targetScene) {
@@ -24,5 +24,55 @@ export function switchScene(targetScene) {
 		}
 		scene.remove(object);
 	}
-	setTimeout(() => loadmodels(targetScene), 3000);
+	// choose the starting location based on the target scene
+	let startRotation = new THREE.Quaternion();
+	let startLocation;
+	switch (targetScene) {
+		case '2nd-floor':
+			startLocation = {
+				x: 0,
+				y: 0,
+				z: 0,
+				w: 1,
+			};
+			break;
+		case '5th-floor':
+			startLocation = {
+				x: 0,
+				y: 0,
+				z: 0,
+				w: 1,
+			};
+			break;
+		case '6th-floor':
+			startLocation = {
+				x: 0,
+				y: 0,
+				z: 0,
+				w: 1,
+			};
+			break;
+		case '7th-floor':
+			startLocation = {
+				x: 0,
+				y: 0,
+				z: 0,
+				w: 1,
+			};
+			break;
+		default:
+			startLocation = {
+				x: -1,
+				y: 0,
+				z: 0,
+				w: 1,
+			};
+	}
+
+	// Set the reference space
+	const baseReferenceSpace = renderer.xr.getReferenceSpace();
+	const transform = new XRRigidTransform(startLocation, startRotation);
+	const beginningSpot = baseReferenceSpace.getOffsetReferenceSpace(transform);
+	renderer.xr.setReferenceSpace(beginningSpot);
+	setTimeout(() => loadmodels(targetScene), 100);
 }
