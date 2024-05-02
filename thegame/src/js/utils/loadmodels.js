@@ -51,6 +51,12 @@ export function loadmodels(target) {
 				await renderer.compileAsync(model, camera, scene);
 			});
 
+			loader.load('objects/bigdesk/bigdesk.gltf', async function (gltf) {
+				const model = gltf.scene;
+				noTeleportGroup.add(model);
+				await renderer.compileAsync(model, camera, scene);
+			});
+
 			loader.load('objects/hissi/hissi.gltf', async function (gltf) {
 				const model = gltf.scene;
 
