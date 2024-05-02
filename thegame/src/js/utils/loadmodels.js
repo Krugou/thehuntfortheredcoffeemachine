@@ -333,6 +333,18 @@ export function loadmodels(target) {
 				noTeleportGroup.add(anotherClonedModel);
 				await renderer.compileAsync(model, camera, scene);
 			});
+			loader.load(
+				'objects/coffeemachine/coffeemachine.gltf',
+				async function (gltf) {
+					const model = gltf.scene;
+
+					model.position.set(0, 0, 0);
+					model.children[0].name = 'finalboss';
+					interactionGroup.add(model);
+
+					await renderer.compileAsync(model, camera, scene);
+				},
+			);
 		});
 	}
 }

@@ -24,7 +24,7 @@ export function onSelectStart(event) {
 			case 'finalboss':
 				console.log('finalboss');
 				updateEndTimeAndCalculateScoreFromStartTimeAndEndTime();
-				setTimeout(() => getScoresFromFirebaseStart(), 2000);
+				setTimeout(() => getScoresFromFirebaseStart(), 500);
 				break;
 			default: {
 				const object = intersection.object;
