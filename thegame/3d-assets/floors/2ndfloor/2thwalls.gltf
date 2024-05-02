@@ -8,10 +8,7 @@
 		{
 			"name":"Scene",
 			"nodes":[
-				0,
-				1,
-				2,
-				3
+				0
 			]
 		}
 	],
@@ -19,48 +16,6 @@
 		{
 			"mesh":0,
 			"name":"Walls",
-			"scale":[
-				0.33336496353149414,
-				0.33336496353149414,
-				0.33336496353149414
-			],
-			"translation":[
-				-26.881887435913086,
-				0,
-				-25.385665893554688
-			]
-		},
-		{
-			"mesh":1,
-			"name":"Plane.001",
-			"scale":[
-				0.33336496353149414,
-				0.33336496353149414,
-				0.33336496353149414
-			],
-			"translation":[
-				-26.881887435913086,
-				0,
-				-25.385665893554688
-			]
-		},
-		{
-			"mesh":2,
-			"name":"Plane.002",
-			"scale":[
-				0.33336496353149414,
-				0.33336496353149414,
-				0.33336496353149414
-			],
-			"translation":[
-				-26.883708953857422,
-				-0.012554003857076168,
-				-25.400949478149414
-			]
-		},
-		{
-			"mesh":3,
-			"name":"Plane.003",
 			"scale":[
 				0.33336496353149414,
 				0.33336496353149414,
@@ -92,6 +47,9 @@
 			"doubleSided":true,
 			"name":"Material.002",
 			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":0
+				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
@@ -100,6 +58,9 @@
 			"doubleSided":true,
 			"name":"Material.003",
 			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":1
+				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
@@ -108,6 +69,9 @@
 			"doubleSided":true,
 			"name":"Material.004",
 			"pbrMetallicRoughness":{
+				"baseColorTexture":{
+					"index":2
+				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
@@ -125,12 +89,7 @@
 					},
 					"indices":3,
 					"material":0
-				}
-			]
-		},
-		{
-			"name":"Plane.002",
-			"primitives":[
+				},
 				{
 					"attributes":{
 						"POSITION":4,
@@ -139,12 +98,7 @@
 					},
 					"indices":7,
 					"material":1
-				}
-			]
-		},
-		{
-			"name":"Plane.004",
-			"primitives":[
+				},
 				{
 					"attributes":{
 						"POSITION":8,
@@ -153,12 +107,7 @@
 					},
 					"indices":11,
 					"material":2
-				}
-			]
-		},
-		{
-			"name":"Plane.005",
-			"primitives":[
+				},
 				{
 					"attributes":{
 						"POSITION":12,
@@ -169,6 +118,37 @@
 					"material":3
 				}
 			]
+		}
+	],
+	"textures":[
+		{
+			"sampler":0,
+			"source":0
+		},
+		{
+			"sampler":0,
+			"source":1
+		},
+		{
+			"sampler":0,
+			"source":2
+		}
+	],
+	"images":[
+		{
+			"mimeType":"image/jpeg",
+			"name":"_DSC5464",
+			"uri":"_DSC5464.jpg"
+		},
+		{
+			"mimeType":"image/jpeg",
+			"name":"_DSC5595",
+			"uri":"_DSC5595.jpg"
+		},
+		{
+			"mimeType":"image/jpeg",
+			"name":"_DSC5594",
+			"uri":"_DSC5594.jpg"
 		}
 	],
 	"accessors":[
@@ -211,14 +191,14 @@
 			"componentType":5126,
 			"count":4,
 			"max":[
-				78.98631286621094,
-				9.151859283447266,
-				101.62120819091797
+				78.98632049560547,
+				9.151860237121582,
+				101.6212158203125
 			],
 			"min":[
-				60.01173400878906,
+				60.011741638183594,
 				0,
-				101.31217956542969
+				101.31218719482422
 			],
 			"type":"VEC3"
 		},
@@ -245,14 +225,14 @@
 			"componentType":5126,
 			"count":4,
 			"max":[
-				83.8392562866211,
-				9.151859283447266,
-				32.1618766784668
+				83.83380889892578,
+				9.114202499389648,
+				32.116024017333984
 			],
 			"min":[
-				83.7677230834961,
-				0,
-				21.25275421142578
+				83.76227569580078,
+				-0.0376584455370903,
+				21.206897735595703
 			],
 			"type":"VEC3"
 		},
@@ -279,14 +259,14 @@
 			"componentType":5126,
 			"count":4,
 			"max":[
-				-64.27537536621094,
-				9.151859283447266,
-				34.344573974609375
+				-64.275390625,
+				9.151861190795898,
+				34.344566345214844
 			],
 			"min":[
-				-64.3268814086914,
+				-64.32689666748047,
 				0,
-				25.743179321289062
+				25.74317169189453
 			],
 			"type":"VEC3"
 		},
@@ -393,6 +373,12 @@
 			"byteLength":32,
 			"byteOffset":32268,
 			"target":34962
+		}
+	],
+	"samplers":[
+		{
+			"magFilter":9729,
+			"minFilter":9987
 		}
 	],
 	"buffers":[
