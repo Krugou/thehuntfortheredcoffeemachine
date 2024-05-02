@@ -28,8 +28,8 @@ export let lastLoggedPosition = null;
 export let model2;
 export let startfloor, lowerfloor, middlefloor, topfloor;
 
-start();
-startVR();
+// start();
+// startVR();
 /**
  * Initializes the 3D scene, camera, renderer, and objects.
  */

@@ -303,7 +303,7 @@ export function loadmodels(target) {
 				const clonedModel = model.clone();
 				// clonedModel.position.z += 2.75; // adjust the value as needed
 				clonedModel.position.set(0, 0, 0);
-				clonedModel.children[0].name = '7th-floor';
+				clonedModel.children[0].name = 'finalboss';
 				console.log(clonedModel);
 				noTeleportGroup.add(clonedModel);
 

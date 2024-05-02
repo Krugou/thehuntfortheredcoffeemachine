@@ -1,80 +1,136 @@
-// import 'firebase/firestore';
-// import {VRButton} from 'three/examples/jsm/webxr/VRButton.js';
-// import {renderer, start, startVR} from './main';
+import {initializeApp} from 'firebase/app';
+import 'firebase/firestore';
+import {
+	addDoc,
+	collection,
+	doc,
+	getDoc,
+	getFirestore,
+	serverTimestamp,
+	updateDoc,
+} from 'firebase/firestore';
+import {VRButton} from 'three/examples/jsm/webxr/VRButton.js';
+import {renderer, scene, start, startVR} from './main';
+import {displayHighScores} from './utils/scoreSystem';
+// Initialize Firebase
+const firebaseConfig = {
+	apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
+	authDomain: import.meta.env.VITE_APP_FIREBASE_AUTH_DOMAIN,
+	projectId: import.meta.env.VITE_APP_FIREBASE_PROJECT_ID,
+	storageBucket: import.meta.env.VITE_APP_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: import.meta.env.VITE_APP_FIREBASE_MESSAGING_SENDER_ID,
+	appId: import.meta.env.VITE_APP_FIREBASE_APP_ID,
+};
+console.log(import.meta.env.VITE_APP_FIREBASE_API_KEY);
+console.log(import.meta.env.VITE_APP_FIREBASE_AUTH_DOMAIN);
+console.log(import.meta.env.VITE_APP_FIREBASE_PROJECT_ID);
+console.log(import.meta.env.VITE_APP_FIREBASE_STORAGE_BUCKET);
+console.log(import.meta.env.VITE_APP_FIREBASE_MESSAGING_SENDER_ID);
+console.log(import.meta.env.VITE_APP_FIREBASE_APP_ID);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+export let userDocId;
+// Get a reference to the body element
+const body = document.querySelector('body');
+body.className = 'h-screen w-screen';
+// Create a container div
+const div = document.createElement('div');
+div.className =
+	' text-black dark:bg-black bg-white dark:text-white   flex justify-center items-center flex-col h-screen w-screen';
 
-// import {initializeApp} from 'firebase/app';
-// import {
-// 	addDoc,
-// 	collection,
-// 	getFirestore,
-// 	serverTimestamp,
-// } from 'firebase/firestore';
-// // Initialize Firebase
-// const firebaseConfig = {
-// 	apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
-// 	authDomain: import.meta.env.VITE_APP_FIREBASE_AUTH_DOMAIN,
-// 	projectId: import.meta.env.VITE_APP_FIREBASE_PROJECT_ID,
-// 	storageBucket: import.meta.env.VITE_APP_FIREBASE_STORAGE_BUCKET,
-// 	messagingSenderId: import.meta.env.VITE_APP_FIREBASE_MESSAGING_SENDER_ID,
-// 	appId: import.meta.env.VITE_APP_FIREBASE_APP_ID,
-// };
-// console.log(import.meta.env.VITE_APP_FIREBASE_API_KEY);
-// console.log(import.meta.env.VITE_APP_FIREBASE_AUTH_DOMAIN);
-// console.log(import.meta.env.VITE_APP_FIREBASE_PROJECT_ID);
-// console.log(import.meta.env.VITE_APP_FIREBASE_STORAGE_BUCKET);
-// console.log(import.meta.env.VITE_APP_FIREBASE_MESSAGING_SENDER_ID);
-// console.log(import.meta.env.VITE_APP_FIREBASE_APP_ID);
-// const app = initializeApp(firebaseConfig);
-// const db = getFirestore(app);
+// Create a new element
+const title = document.createElement('h1');
+title.textContent = 'the Hunt for the Red Coffee Machine';
 
-// // Get a reference to the body element
-// const body = document.querySelector('body');
-// body.className = 'h-screen w-screen';
-// // Create a container div
-// const div = document.createElement('div');
-// div.className =
-// 	' text-black dark:bg-black bg-white dark:text-white   flex justify-center items-center flex-col h-screen w-screen';
+// Add Tailwind CSS classes to the title
+title.className = 'text-4xl text-green dark:text-slate-500 text-center mt-5 ';
+div.appendChild(title);
 
-// // Create a new element
-// const title = document.createElement('h1');
-// title.textContent = 'the Hunt for the Red Coffee Machine';
+const input = document.createElement('input');
+input.type = 'text';
+input.placeholder = 'Enter desired nickname';
+input.className =
+	'text-center text-black dark:text-white text-white dark:bg-black mt-4';
+input.style.margin = 'auto'; // Center the input field
 
-// // Add Tailwind CSS classes to the title
-// title.className = 'text-4xl text-green dark:text-slate-500 text-center mt-5 ';
-// div.appendChild(title);
+// Add an event listener to the input field
+input.addEventListener('keypress', function (e) {
+	if (e.key === 'Enter') {
+		const nickName = input.value;
+		addUserToFirestore(nickName);
+		// Remove input field after user has entered their name
+		input.remove();
+		start();
+		startVR();
+		// Add VRButton after user has entered their name
+		const button = VRButton.createButton(renderer);
+		div.appendChild(button);
 
-// const input = document.createElement('input');
-// input.type = 'text';
-// input.placeholder = 'Enter username';
-// input.className =
-// 	'text-center text-black dark:text-white text-white dark:bg-black mt-4';
-// input.style.margin = 'auto'; // Center the input field
+		// Check if VR is supported
+		navigator.xr.isSessionSupported('immersive-vr').then(supported => {
+			if (supported) {
+				// Enter VR mode after user has entered their name
+				navigator.xr
+					.requestSession('immersive-vr', {
+						optionalFeatures: ['local-floor', 'bounded-floor'],
+					})
+					.then(session => {
+						renderer.xr.setSession(session);
+					});
+			} else {
+				console.error('VR not supported');
+			}
+		});
+	}
+});
 
-// // Add an event listener to the input field
-// input.addEventListener('keypress', function (e) {
-// 	if (e.key === 'Enter') {
-// 		const userName = input.value;
-// 		addUserToFirestore(userName);
-// 		// Remove input field after user has entered their name
-// 		input.remove();
-// 		start();
-// 		startVR();
-// 		// Add VRButton after user has entered their name
-// 		div.appendChild(VRButton.createButton(renderer));
-// 	}
-// });
+div.appendChild(input);
+// Append the new element to the body
+body.appendChild(div);
+async function addUserToFirestore(nickName) {
+	try {
+		const docRef = await addDoc(collection(db, 'highscores'), {
+			nickName: nickName,
+			startTime: serverTimestamp(),
+			endTime: serverTimestamp(),
+			score: 0,
+		});
 
-// div.appendChild(input);
-// // Append the new element to the body
-// body.appendChild(div);
-// async function addUserToFirestore(userName) {
-// 	try {
-// 		await addDoc(collection(db, 'users'), {
-// 			name: userName,
-// 			startTime: serverTimestamp(),
-// 			score: 0,
-// 		});
-// 	} catch (e) {
-// 		console.error('Error adding document: ', e);
-// 	}
-// }
+		// Get the document ID
+		userDocId = docRef.id;
+	} catch (e) {
+		console.error('Error adding document: ', e);
+	}
+}
+export async function updateEndTimeAndCalculateScoreFromStartTimeAndEndTime() {
+	try {
+		const userRef = doc(db, 'highscores', userDocId);
+
+		// Update the end time in the document
+		await updateDoc(userRef, {
+			endTime: serverTimestamp(),
+		});
+
+		// Get the updated document
+		const userDoc = await getDoc(userRef);
+
+		const score = calculateScore(
+			userDoc.data().startTime,
+			userDoc.data().endTime,
+		);
+
+		// Update the score in the document
+		await updateDoc(userRef, {
+			score: score,
+		});
+	} catch (e) {
+		console.error('Error updating document: ', e);
+	}
+}
+export async function getScoresFromFirebaseStart() {
+	displayHighScores(scene, db);
+}
+function calculateScore(startTime, endTime) {
+	// Replace this with your score calculation logic
+	return endTime.seconds - startTime.seconds;
+}

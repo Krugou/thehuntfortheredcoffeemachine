@@ -1,55 +1,58 @@
+import {collection, getDocs, limit, orderBy, query} from 'firebase/firestore';
 import * as THREE from 'three';
+import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
+import {FontLoader} from 'three/addons/loaders/FontLoader.js';
+import {noTeleportGroup} from '../main';
+async function getHighScores(db) {
+	try {
+		// Create a query against the collection
+		const q = query(
+			collection(db, 'highscores'),
+			orderBy('score', 'asc'),
+			limit(6),
+		);
 
-let scoreText;
-let font;
-let hudCamera;
-
-// Function to initialize the score
-export function initializeScore(scene, renderer, width, height) {
-    // Create a loader for the font
-    const loader = new THREE.FontLoader();
-
-    // Create a camera for the HUD
-    hudCamera = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 1, 10);
-    hudCamera.position.z = 10;
-
-    // Load a font
-    loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (loadedFont) {
-        font = loadedFont;
-
-        // Create a geometry for the score text
-        const geometry = new THREE.TextGeometry('Score: 0', {
-            font: font,
-            size: 20,
-            height: 0.1,
-        });
-
-        // Create a material for the score text
-        const material = new THREE.MeshBasicMaterial({color: 0xffffff});
-
-        // Create a mesh for the score text
-        scoreText = new THREE.Mesh(geometry, material);
-
-        // Position the score text
-        scoreText.position.set(width / 2 - 50, height / 2 - 50, 0);
-
-        // Add the score text to the scene
-        scene.add(scoreText);
-    });
+		const querySnapshot = await getDocs(q);
+		let highScores = [];
+		querySnapshot.forEach(doc => {
+			// doc.data() is never undefined for query doc snapshots
+			console.log(doc.id, ' => ', doc.data());
+			highScores.push(doc.data());
+		});
+		return highScores;
+	} catch (e) {
+		console.error('Error getting documents: ', e);
+	}
 }
 
-// Function to update the score
-export function updateScore(scene, newScore) {
-    // Remove the old score text from the scene
-    scene.remove(scoreText);
+export async function displayHighScores(scene, db) {
+	const loader = new FontLoader();
 
-    // Update the geometry of the score text
-    scoreText.geometry = new THREE.TextGeometry('Score: ' + newScore, {
-        font: font,
-        size: 20,
-        height: 0.1,
-    });
+	loader.load(
+		'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json',
+		function (font) {
+			getHighScores(db).then(highScores => {
+				highScores.forEach((highScore, index) => {
+					const geometry = new TextGeometry(
+						` ${highScore.nickName} - ${highScore.score}`,
+						{
+							font: font,
+							size: 1,
+							height: 0.1,
+						},
+					);
 
-    // Add the updated score text to the scene
-    scene.add(scoreText);
+					const material = new THREE.MeshBasicMaterial({color: 0xffffff});
+
+					const mesh = new THREE.Mesh(geometry, material);
+
+					// Position the text mesh
+					mesh.position.set(0, index * 2, 0);
+					mesh.rotation.y = Math.PI;
+					// Add the text mesh to the scene
+					noTeleportGroup.add(mesh);
+				});
+			});
+		},
+	);
 }
