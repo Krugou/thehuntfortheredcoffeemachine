@@ -3,6 +3,7 @@ import {VRButton} from 'three/addons/webxr/VRButton.js';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import {animate} from '/js/utils/animate.js';
 import {configureControllers} from '/js/utils/configureControllers';
+import {initializeAudio} from '/js/utils/initializeAudio.js';
 import {loadmodels} from '/js/utils/loadmodels.js';
 import {onSelectEnd} from '/js/utils/onSelectEnd.js';
 import {onSelectStart} from '/js/utils/onSelectStart.js';
@@ -83,6 +84,7 @@ export function start() {
 
 	// Call the animate export function to start the animation loop
 	animate();
+	initializeAudio();
 }
 
 // // start location on vr start
