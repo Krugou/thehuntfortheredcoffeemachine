@@ -128,3 +128,9 @@ build/
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+.idea/vcs.xml
+.idea/thehuntfortheredcoffeemachine.iml
+.idea/modules.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/codeStyles/Project.xml
+.idea/codeStyles/codeStyleConfig.xml
