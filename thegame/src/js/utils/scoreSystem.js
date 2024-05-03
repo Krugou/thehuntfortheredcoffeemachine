@@ -8,7 +8,7 @@ async function getHighScores(db) {
 		// Create a query against the collection
 		const q = query(
 			collection(db, 'highscores'),
-			orderBy('score', 'desc'),
+			orderBy('score', 'asc'),
 			limit(5),
 		);
 
@@ -35,7 +35,7 @@ export async function displayHighScores(scene, db) {
 			getHighScores(db).then(highScores => {
 				// Create the header
 				const headerGeometry = new TextGeometry(
-					'Congratulations you won! Top Five:',
+					'Congratulations you won! Fastest Times:',
 					{
 						font: font,
 						size: 0.12,

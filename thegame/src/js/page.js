@@ -53,36 +53,56 @@ input.className =
 	'text-center text-black dark:text-white text-white dark:bg-black mt-4';
 input.style.margin = 'auto'; // Center the input field
 
+// Create a button
+const button = document.createElement('button');
+button.textContent = 'Start';
+button.className = 'mt-4';
+
+// Add an event listener to the button
+button.addEventListener('click', startGame);
+
 // Add an event listener to the input field
 input.addEventListener('keypress', function (e) {
 	if (e.key === 'Enter') {
-		const nickName = input.value;
-		addUserToFirestore(nickName);
-		// Remove input field after user has entered their name
-		input.remove();
-		start();
-		startVR();
-		// Add VRButton after user has entered their name
-		const button = VRButton.createButton(renderer);
-		div.appendChild(button);
-
-		// Check if VR is supported
-		navigator.xr.isSessionSupported('immersive-vr').then(supported => {
-			if (supported) {
-				// Enter VR mode after user has entered their name
-				navigator.xr
-					.requestSession('immersive-vr', {
-						optionalFeatures: ['local-floor', 'bounded-floor'],
-					})
-					.then(session => {
-						renderer.xr.setSession(session);
-					});
-			} else {
-				console.error('VR not supported');
-			}
-		});
+		startGame();
 	}
 });
+
+div.appendChild(input);
+div.appendChild(button); // Append the button to the div
+
+function startGame() {
+	if (input.value === '') {
+		alert('Please enter a nickname');
+		return;
+	}
+	const nickName = input.value;
+	addUserToFirestore(nickName);
+	// Remove input field and button after user has entered their name
+	input.remove();
+	button.remove();
+	start();
+	startVR();
+	// Add VRButton after user has entered their name
+	const vrButton = VRButton.createButton(renderer);
+	div.appendChild(vrButton);
+
+	// Check if VR is supported
+	navigator.xr.isSessionSupported('immersive-vr').then(supported => {
+		if (supported) {
+			// Enter VR mode after user has entered their name
+			navigator.xr
+				.requestSession('immersive-vr', {
+					optionalFeatures: ['local-floor', 'bounded-floor'],
+				})
+				.then(session => {
+					renderer.xr.setSession(session);
+				});
+		} else {
+			console.error('VR not supported');
+		}
+	});
+}
 
 div.appendChild(input);
 // Append the new element to the body
