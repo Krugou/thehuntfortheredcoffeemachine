@@ -43,10 +43,23 @@ div.className = 'bg-white rounded-lg shadow-lg p-10 text-center';
 // Create a new element
 const title = document.createElement('h1');
 title.textContent = 'The Hunt for the Red Coffee Machine';
+const instructions = document.createElement('p');
+instructions.textContent =
+	'The goal of the game is to locate the red coffee machine.';
+instructions.className = 'text-base text-red-500 mb-3';
 
+const instructions2 = document.createElement('p');
+instructions2.innerHTML = `
+<ul class="list-disc list-inside text-red-500 text-base mb-5">
+  <li>Move between floors by using the elevator buttons. Activate the buttons using the trigger button on your controller.</li>
+  <li>Teleport to different locations within the same floor using the squeeze button on your controller.</li>
+</ul>
+`;
 // Add Tailwind CSS classes to the title
 title.className = 'text-4xl text-red-500 mb-5';
 div.appendChild(title);
+div.appendChild(instructions);
+div.appendChild(instructions2);
 
 // Create an input container
 const inputDiv = document.createElement('div');
