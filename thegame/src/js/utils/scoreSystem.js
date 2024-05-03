@@ -34,40 +34,45 @@ export async function displayHighScores(scene, db) {
 		function (font) {
 			getHighScores(db).then(highScores => {
 				// Create the header
-				const headerGeometry = new TextGeometry(
-					'Congratulations you won! Fastest Times:',
-					{
-						font: font,
-						size: 0.12,
-						height: 0.01,
-					},
-				);
+				const headerGeometry = new TextGeometry('Congratulations you won!', {
+					font: font,
+					size: 0.12,
+					height: 0.01,
+				});
+				const headerGeometry2 = new TextGeometry('Fastest times:', {
+					font: font,
+					size: 0.1,
+					height: 0.01,
+				});
 
 				const headerMaterial = new THREE.MeshBasicMaterial({color: 0xffffff});
 
 				const headerMesh = new THREE.Mesh(headerGeometry, headerMaterial);
+				const headerMesh2 = new THREE.Mesh(headerGeometry2, headerMaterial);
 
 				// Position the header mesh
-				headerMesh.position.set(xPosition, yPosition, zPosition);
+				headerMesh.position.set(xPosition, yPosition + 0.5, zPosition);
+				headerMesh2.position.set(xPosition, yPosition, zPosition);
+				headerMesh2.rotation.y = Math.PI;
 				headerMesh.rotation.y = Math.PI;
 
 				// Add the header mesh to the scene
-				noTeleportGroup.add(headerMesh);
+				noTeleportGroup.add(headerMesh, headerMesh2);
 
 				// Display the high scores
 				highScores.forEach((highScore, index) => {
 					if (highScore.score === 0) {
 						return;
-				}
-		
-				const geometry = new TextGeometry(
+					}
+
+					const geometry = new TextGeometry(
 						` ${highScore.nickName} - ${highScore.score}`,
 						{
-								font: font,
-								size: 0.1,
-								height: 0.01,
+							font: font,
+							size: 0.1,
+							height: 0.01,
 						},
-				);
+					);
 
 					const material = new THREE.MeshBasicMaterial({color: 0xffffff});
 
