@@ -56,14 +56,18 @@ export async function displayHighScores(scene, db) {
 
 				// Display the high scores
 				highScores.forEach((highScore, index) => {
-					const geometry = new TextGeometry(
+					if (highScore.score === 0) {
+						return;
+				}
+		
+				const geometry = new TextGeometry(
 						` ${highScore.nickName} - ${highScore.score}`,
 						{
-							font: font,
-							size: 0.1,
-							height: 0.01,
+								font: font,
+								size: 0.1,
+								height: 0.01,
 						},
-					);
+				);
 
 					const material = new THREE.MeshBasicMaterial({color: 0xffffff});
 
