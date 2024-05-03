@@ -193,6 +193,7 @@ export function loadmodels(target) {
 			loadModel(loader, 'floors/6thfloor/6thfloor.gltf', [0, 0, 0], true);
 			loadModel(loader, 'floors/6thfloor/6thwalls.gltf', [0, 0, 0]);
 			loadModel(loader, 'floors/6thfloor/6thdoors.gltf', [0, 0, 0]);
+			loadModel(loader, 'floors/6thfloor/smalldeskAndChairgroup1.gltf', [0, 0, 0]);
 			loadModel(loader, 'objects/kitchen/kitchen.gltf', [0, 0, 0]);
 
 			loader.load('objects/smalldesk/smalldesk.gltf', async function (gltf) {
@@ -270,6 +271,13 @@ export function loadmodels(target) {
 			loadModel(loader, 'floors/7thfloor/7thfloor.gltf', [0, 0, 0], true);
 			loadModel(loader, 'floors/7thfloor/7thwalls.gltf', [0, 0, 0]);
 			loadModel(loader, 'floors/7thfloor/7thdoors.gltf', [0, 0, 0]);
+			loadModel(loader, 'floors/7thfloor/smalldeskAndChairgroup1.gltf', [0, 0, 0]);
+			loadModel(loader, 'floors/7thfloor/smalldeskAndChairgroup2.gltf', [0, 0, 0]);
+			loadModel(
+				loader,
+				'objects/coffeemachine/coffeemachinetable.gltf',
+				[0, 0, 0],
+			);
 			// loadModel(loader, 'floors/7thfloor/extraStuff.gltf', [0, 0, 0]);
 			loadModel(loader, 'objects/kitchen/kitchen.gltf', [0, 0, 0]);
 

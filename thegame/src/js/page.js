@@ -30,33 +30,40 @@ console.log(import.meta.env.VITE_APP_FIREBASE_APP_ID);
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 export let userDocId;
+
 // Get a reference to the body element
 const body = document.querySelector('body');
-body.className = 'h-screen w-screen';
+body.className =
+	'h-screen w-screen bg-gray-100 flex items-center justify-center';
+
 // Create a container div
 const div = document.createElement('div');
-div.className =
-	' text-black dark:bg-black bg-white dark:text-white   flex justify-center items-center flex-col h-screen w-screen';
+div.className = 'bg-white rounded-lg shadow-lg p-10 text-center';
 
 // Create a new element
 const title = document.createElement('h1');
-title.textContent = 'the Hunt for the Red Coffee Machine';
+title.textContent = 'The Hunt for the Red Coffee Machine';
 
 // Add Tailwind CSS classes to the title
-title.className = 'text-4xl text-green dark:text-slate-500 text-center mt-5 ';
+title.className = 'text-4xl text-red-500 mb-5';
 div.appendChild(title);
 
+// Create an input container
+const inputDiv = document.createElement('div');
+inputDiv.className = 'flex justify-center items-center space-x-4';
+
+// Create an input field
 const input = document.createElement('input');
 input.type = 'text';
 input.placeholder = 'Enter desired nickname';
 input.className =
-	'text-center text-black dark:text-white text-white dark:bg-black mt-4';
-input.style.margin = 'auto'; // Center the input field
+	'border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-red-500 ';
 
 // Create a button
 const button = document.createElement('button');
 button.textContent = 'Start';
-button.className = 'mt-4';
+button.className =
+	'bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-800';
 
 // Add an event listener to the button
 button.addEventListener('click', startGame);
@@ -68,9 +75,10 @@ input.addEventListener('keypress', function (e) {
 	}
 });
 
-div.appendChild(input);
-div.appendChild(button); // Append the button to the div
-
+inputDiv.appendChild(input);
+inputDiv.appendChild(button);
+div.appendChild(inputDiv);
+body.appendChild(div);
 function startGame() {
 	if (input.value === '') {
 		alert('Please enter a nickname');
@@ -104,9 +112,6 @@ function startGame() {
 	});
 }
 
-div.appendChild(input);
-// Append the new element to the body
-body.appendChild(div);
 async function addUserToFirestore(nickName) {
 	try {
 		const docRef = await addDoc(collection(db, 'highscores'), {

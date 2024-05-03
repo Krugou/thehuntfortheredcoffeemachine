@@ -37,16 +37,16 @@
 	"materials":[
 		{
 			"doubleSided":true,
-			"name":"Material",
+			"name":"walls",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
-					0.6156730651855469,
-					0.7593405246734619,
-					0.8002041578292847,
+					0.1593618392944336,
+					0.5078313946723938,
+					1,
 					1
 				],
 				"metallicFactor":0,
-				"roughnessFactor":0.5
+				"roughnessFactor":0.8056994676589966
 			}
 		}
 	],
