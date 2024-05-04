@@ -168,21 +168,7 @@ export function loadmodels(target) {
 		loadModel(loader, 'floors/6thfloor/smalldeskAndChairgroup1.gltf', [0, 0, 0]);
 		loadModel(loader, 'objects/kitchen/kitchen.gltf', [0, 0, 0]);
 
-		loader.load('objects/smalldesk/smalldesk.gltf', async function (gltf) {
-			const model = gltf.scene;
-			// x-axis (left/right), y-axis (up/down), z-axis (forward/backward)
-
-			model.position.set(10, 0, -10);
-			noTeleportGroup.add(model);
-			const clonedModel = model.clone();
-			// clonedModel.position.z += 2.75; // adjust the value as needed
-			clonedModel.position.set(0, 0, 0);
-
-			console.log(clonedModel);
-			noTeleportGroup.add(clonedModel);
-
-			await renderer.compileAsync(model, camera, scene);
-		});
+	
 		loader.load('objects/hissi/hissi.gltf', async function (gltf) {
 			const model = gltf.scene;
 
@@ -240,21 +226,7 @@ export function loadmodels(target) {
 		// loadModel(loader, 'floors/7thfloor/extraStuff.gltf', [0, 0, 0]);
 		loadModel(loader, 'objects/kitchen/kitchen.gltf', [0, 0, 0]);
 
-		loader.load('objects/smalldesk/smalldesk.gltf', async function (gltf) {
-			const model = gltf.scene;
-			// x-axis (left/right), y-axis (up/down), z-axis (forward/backward)
 
-			model.position.set(10, 0, -10);
-			noTeleportGroup.add(model);
-			const clonedModel = model.clone();
-			// clonedModel.position.z += 2.75; // adjust the value as needed
-			clonedModel.position.set(0, 0, 0);
-			clonedModel.children[0].name = 'finalboss';
-			console.log(clonedModel);
-			noTeleportGroup.add(clonedModel);
-
-			await renderer.compileAsync(model, camera, scene);
-		});
 		loader.load('objects/hissi/hissi.gltf', async function (gltf) {
 			const model = gltf.scene;
 
