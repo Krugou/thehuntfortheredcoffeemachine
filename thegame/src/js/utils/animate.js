@@ -1,17 +1,19 @@
 import * as THREE from 'three';
 import {
+	ambientLight,
 	camera,
 	controller1,
 	controller2,
 	controls,
-	directionalLight,
+	flicker,
 	renderer,
 	scene,
-} from '../main.js'; // assuming these are exported from main.js
+} from '../main.js';
 import {cleanIntersected} from './cleanIntersected.js';
 import {intersectObjects} from './intersectObjects.js';
 import {moveMarker} from './moveMarker.js';
 export let clock = new THREE.Clock();
+
 /**
  * Animates the scene.
  */
@@ -22,10 +24,12 @@ export function animate() {
 		intersectObjects(controller2);
 		moveMarker();
 		controls.update();
-
-		if (directionalLight) {
-			// directionalLight.position.x = Math.sin(clock.getElapsedTime()) * 0.02;
-			// directionalLight.position.z = Math.cos(clock.getElapsedTime()) * 0.02;
+		if (flicker) {
+			ambientLight.intensity = Math.abs(
+				Math.sin(clock.getElapsedTime() * Math.PI),
+			);
+		} else {
+			ambientLight.intensity = 0;
 		}
 
 		renderer.render(scene, camera);

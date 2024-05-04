@@ -92,7 +92,7 @@ inputDiv.appendChild(input);
 inputDiv.appendChild(button);
 div.appendChild(inputDiv);
 const highScoresList = document.createElement('ul');
-highScoresList.className = 'text-left text-red-500';
+highScoresList.className = 'text-center m-2 text-red-500';
 const lifirst = document.createElement('li');
 lifirst.textContent = 'High Scores:';
 highScoresList.appendChild(lifirst);

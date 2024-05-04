@@ -26,7 +26,7 @@ export const tempMatrix = new THREE.Matrix4();
 export let container, camera, scene, renderer, cube, controls;
 export let lastLoggedPosition = null;
 export let model2;
-export let startfloor, lowerfloor, middlefloor, topfloor;
+export let startfloor, lowerfloor, middlefloor, topfloor, flicker, ambientLight;
 
 // start();
 // startVR();
@@ -85,6 +85,17 @@ export function start() {
 	// Call the animate export function to start the animation loop
 	animate();
 	initializeAudio();
+	ambientLight = new THREE.AmbientLight(0xffffff, 0);
+
+	scene.add(ambientLight);
+	// Flicker function
+	flicker = false;
+	setInterval(() => {
+		flicker = !flicker;
+		setTimeout(() => {
+			flicker = !flicker;
+		}, 200);
+	}, 60000);
 }
 
 // // start location on vr start
