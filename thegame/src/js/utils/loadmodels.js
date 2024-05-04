@@ -44,6 +44,7 @@ export function loadmodels(target) {
 			loadModel(loader, 'floors/2ndfloor/2thlockers.gltf', [0, 0, 0]);
 			loadModel(loader, 'floors/2ndfloor/2thpillars.gltf', [0, 0, 0]);
 			loadModel(loader, 'floors/2ndfloor/2thOutsideDoors.gltf', [0, 0, 0]);
+			loadModel(loader, 'floors/2ndfloor/2thtuolit.gltf', [0, 0, 0]);
 
 			loader.load('objects/sohva/sohva.gltf', async function (gltf) {
 				const model = gltf.scene;
@@ -98,16 +99,6 @@ export function loadmodels(target) {
 				clonedModel.children[0].name = '5th-floor';
 				anotherClonedModel.children[0].name = '5th-floor';
 				interactionGroup.add(model, clonedModel, anotherClonedModel);
-				await renderer.compileAsync(model, camera, scene);
-			});
-
-			loader.load('objects/tuoli/tuoli.gltf', async function (gltf) {
-				const model = gltf.scene;
-
-				model.position.set(5, 0, 0);
-				model.scale.set(0.4, 0.4, 0.4);
-
-				noTeleportGroup.add(model);
 				await renderer.compileAsync(model, camera, scene);
 			});
 		});
