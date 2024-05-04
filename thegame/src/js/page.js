@@ -11,7 +11,7 @@ import {
 } from 'firebase/firestore';
 import {VRButton} from 'three/examples/jsm/webxr/VRButton.js';
 import {renderer, scene, start, startVR} from './main';
-import {displayHighScores} from './utils/scoreSystem';
+import {displayHighScores, getHighScores} from './utils/scoreSystem';
 // Initialize Firebase
 const firebaseConfig = {
 	apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
@@ -91,6 +91,20 @@ input.addEventListener('keypress', function (e) {
 inputDiv.appendChild(input);
 inputDiv.appendChild(button);
 div.appendChild(inputDiv);
+const highScoresList = document.createElement('ul');
+highScoresList.className = 'text-left text-red-500';
+const lifirst = document.createElement('li');
+lifirst.textContent = 'High Scores:';
+highScoresList.appendChild(lifirst);
+getHighScores(db).then(scores => {
+	scores.forEach(score => {
+		const li = document.createElement('li');
+		li.textContent = `${score.nickName}: ${score.score} seconds`;
+		highScoresList.appendChild(li);
+	});
+});
+div.appendChild(highScoresList);
+
 body.appendChild(div);
 function startGame() {
 	if (input.value === '') {
@@ -130,8 +144,6 @@ async function addUserToFirestore(nickName) {
 		const docRef = await addDoc(collection(db, 'highscores'), {
 			nickName: nickName,
 			startTime: serverTimestamp(),
-			endTime: serverTimestamp(),
-			score: 0,
 		});
 
 		// Get the document ID

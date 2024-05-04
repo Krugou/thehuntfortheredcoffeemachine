@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
 import {FontLoader} from 'three/addons/loaders/FontLoader.js';
 import {noTeleportGroup} from '../main';
-async function getHighScores(db) {
+export async function getHighScores(db) {
 	try {
 		// Create a query against the collection
 		const q = query(
@@ -66,7 +66,7 @@ export async function displayHighScores(scene, db) {
 					}
 
 					const geometry = new TextGeometry(
-						` ${highScore.nickName} - ${highScore.score}`,
+						` ${highScore.nickName} - ${highScore.score} seconds`,
 						{
 							font: font,
 							size: 0.1,
