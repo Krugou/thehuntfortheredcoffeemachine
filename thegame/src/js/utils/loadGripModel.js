@@ -16,11 +16,31 @@ export function loadGripModel(controllerGrip1, controllerGrip2) {
 		// Move the model a little lower
 		mymodel.position.set(0, 0, 0);
 
+		let mymodel2 = mymodel.clone();
 		// Add the model to the first controller
 		controllerGrip1.add(mymodel);
+		// Create a directional light
+		// Create a directional light
+		const light = new THREE.SpotLight(0xffffff, 0.9);
+		light.position.set(0, 0, 0);
+		light.angle = Math.PI / 2; // Narrow the light cone
+		light.penumbra = 0.2; // Controls the softness of the light's edge
+		light.decay = 1; // Controls how the light intensity decreases over distance
+		light.distance = 50;
 
-		// Clone the model
-		let mymodel2 = mymodel.clone();
+		// Create a new Object3D to serve as the light's target
+		const target = new THREE.Object3D();
+
+		// Position the target in front of the light along the z-axis
+		target.position.set(0, 0, -1);
+
+		// Set the light's target
+		light.target = target;
+
+		controllerGrip2.add(light);
+
+		// Add the target to the controllerGrip2 so it moves with the light
+		controllerGrip2.add(light.target);
 
 		// Add the cloned model to the second controller
 		controllerGrip2.add(mymodel2);

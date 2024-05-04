@@ -49,7 +49,7 @@ export function start() {
 		70, // Field of view
 		window.innerWidth / window.innerHeight, // Aspect ratio
 		0.1, // Near clipping plane
-		30, // Far clipping plane
+		20, // Far clipping plane
 	);
 
 	// Create a new THREE.WebGLRenderer object
@@ -60,8 +60,8 @@ export function start() {
 	container.appendChild(renderer.domElement);
 
 	// Add a directional light to the scene
-	directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-	scene.add(directionalLight);
+	// directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+	// scene.add(directionalLight);
 
 	// // Add an axes helper to the scene
 	// const axesHelper = new THREE.AxesHelper(3);
@@ -69,8 +69,8 @@ export function start() {
 	// scene.add(axesHelper);
 
 	// Add ambient light to the scene
-	const light = new THREE.AmbientLight(0x404040); // soft white light
-	scene.add(light);
+	// const light = new THREE.AmbientLight(0x404040); // soft white light
+	// scene.add(light);
 	scene.add(interactionGroup);
 
 	// Set the camera's position and look at the axes helper

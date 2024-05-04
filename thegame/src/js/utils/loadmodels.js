@@ -27,323 +27,290 @@ async function loadModel(loader, modelPath, position, teleportEnabled = false) {
 }
 export function loadmodels(target) {
 	if (target === '2nd-floor') {
-		new RGBELoader().setPath(basePath).load('hdr/office.hdr', function (texture) {
-			texture.mapping = THREE.EquirectangularReflectionMapping;
+		// new RGBELoader().setPath(basePath).load('hdr/office.hdr', function (texture) {
+		// 	texture.mapping = THREE.EquirectangularReflectionMapping;
 
-			scene.background = texture;
-			scene.environment = texture;
-			renderer.toneMappingExposure = 10.0;
-			const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-			const light = new THREE.AmbientLight(0x404040); // soft white light
-			scene.add(light, directionalLight);
+		// 	scene.background = texture;
+		// 	scene.environment = texture;
+		// 	// const light = new THREE.AmbientLight(0xffffff); // soft white light
+		// 	// scene.add(light);
+		// 	renderer.toneMappingExposure = 10.0;
 
-			const loader = new GLTFLoader().setPath(basePath);
-			loadModel(loader, 'floors/2ndfloor/2thfloor.gltf', [0, 0, 0], true);
-			loadModel(loader, 'floors/2ndfloor/2thwalls.gltf', [0, 0, 0]);
-			loadModel(loader, 'floors/2ndfloor/2thdoors.gltf', [0, 0, 0]);
-			loadModel(loader, 'floors/2ndfloor/2thlockers.gltf', [0, 0, 0]);
-			loadModel(loader, 'floors/2ndfloor/2thpillars.gltf', [0, 0, 0]);
-			loadModel(loader, 'floors/2ndfloor/2thOutsideDoors.gltf', [0, 0, 0]);
-			loadModel(loader, 'floors/2ndfloor/2thtuolit.gltf', [0, 0, 0]);
+		const loader = new GLTFLoader().setPath(basePath);
+		loadModel(loader, 'floors/2ndfloor/2thfloor.gltf', [0, 0, 0], true);
+		loadModel(loader, 'floors/2ndfloor/2thwalls.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/2ndfloor/2thdoors.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/2ndfloor/2thlockers.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/2ndfloor/2thpillars.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/2ndfloor/2thOutsideDoors.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/2ndfloor/2thtuolit.gltf', [0, 0, 0]);
 
-			loader.load('objects/sohva/sohva.gltf', async function (gltf) {
-				const model = gltf.scene;
-				noTeleportGroup.add(model);
-				await renderer.compileAsync(model, camera, scene);
-			});
-
-			loader.load('objects/bigdesk/bigdesk.gltf', async function (gltf) {
-				const model = gltf.scene;
-				noTeleportGroup.add(model);
-				await renderer.compileAsync(model, camera, scene);
-			});
-
-			loader.load('objects/hissi/hissi.gltf', async function (gltf) {
-				const model = gltf.scene;
-
-				model.position.set(0, 0, 0);
-
-				noTeleportGroup.add(model);
-				const clonedModel = model.clone();
-				clonedModel.position.z -= 2.75; // adjust the value as needed
-				noTeleportGroup.add(clonedModel);
-				const anotherClonedModel = clonedModel.clone();
-				anotherClonedModel.position.z -= 2.75; // adjust the value as needed
-				noTeleportGroup.add(anotherClonedModel);
-				await renderer.compileAsync(model, camera, scene);
-			});
-			loader.load('objects/hissi/hissidown.gltf', async function (gltf) {
-				const model = gltf.scene;
-
-				model.position.set(0, 0, 0);
-
-				noTeleportGroup.add(model);
-				const clonedModel = model.clone();
-				clonedModel.position.z -= 2.75; // adjust the value as needed
-				noTeleportGroup.add(clonedModel);
-				const anotherClonedModel = clonedModel.clone();
-				anotherClonedModel.position.z -= 2.75; // adjust the value as needed
-				noTeleportGroup.add(anotherClonedModel);
-				await renderer.compileAsync(model, camera, scene);
-			});
-			loader.load('objects/hissi/hissiup.gltf', async function (gltf) {
-				const model = gltf.scene;
-
-				model.position.set(0, 0, 0);
-
-				const clonedModel = model.clone();
-				clonedModel.position.z -= 2.75; // adjust the value as needed
-				const anotherClonedModel = clonedModel.clone();
-				anotherClonedModel.position.z -= 2.75; // adjust the value as needed
-				model.children[0].name = '5th-floor';
-				clonedModel.children[0].name = '5th-floor';
-				anotherClonedModel.children[0].name = '5th-floor';
-				interactionGroup.add(model, clonedModel, anotherClonedModel);
-				await renderer.compileAsync(model, camera, scene);
-			});
+		loader.load('objects/sohva/sohva.gltf', async function (gltf) {
+			const model = gltf.scene;
+			noTeleportGroup.add(model);
+			await renderer.compileAsync(model, camera, scene);
 		});
+
+		loader.load('objects/bigdesk/bigdesk.gltf', async function (gltf) {
+			const model = gltf.scene;
+			noTeleportGroup.add(model);
+			await renderer.compileAsync(model, camera, scene);
+		});
+
+		loader.load('objects/hissi/hissi.gltf', async function (gltf) {
+			const model = gltf.scene;
+
+			model.position.set(0, 0, 0);
+
+			noTeleportGroup.add(model);
+			const clonedModel = model.clone();
+			clonedModel.position.z -= 2.75; // adjust the value as needed
+			noTeleportGroup.add(clonedModel);
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z -= 2.75; // adjust the value as needed
+			noTeleportGroup.add(anotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		loader.load('objects/hissi/hissidown.gltf', async function (gltf) {
+			const model = gltf.scene;
+
+			model.position.set(0, 0, 0);
+
+			noTeleportGroup.add(model);
+			const clonedModel = model.clone();
+			clonedModel.position.z -= 2.75; // adjust the value as needed
+			noTeleportGroup.add(clonedModel);
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z -= 2.75; // adjust the value as needed
+			noTeleportGroup.add(anotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		loader.load('objects/hissi/hissiup.gltf', async function (gltf) {
+			const model = gltf.scene;
+
+			model.position.set(0, 0, 0);
+
+			const clonedModel = model.clone();
+			clonedModel.position.z -= 2.75; // adjust the value as needed
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z -= 2.75; // adjust the value as needed
+			model.children[0].name = '5th-floor';
+			clonedModel.children[0].name = '5th-floor';
+			anotherClonedModel.children[0].name = '5th-floor';
+			interactionGroup.add(model, clonedModel, anotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		// }
+		// );
 	}
 	if (target === '5th-floor') {
-		new RGBELoader().setPath(basePath).load('hdr/office.hdr', function (texture) {
-			texture.mapping = THREE.EquirectangularReflectionMapping;
+		const loader = new GLTFLoader().setPath(basePath);
+		loadModel(loader, 'floors/5thfloor/5thfloor.gltf', [0, 0, 0], true);
+		loadModel(loader, 'floors/5thfloor/5thwalls.gltf', [0, 0, 0]);
+		loadModel(loader, 'objects/kitchen/kitchen.gltf', [-0.1, 0, -1.1]);
 
-			scene.background = texture;
-			scene.environment = texture;
-			renderer.toneMappingExposure = 10.0;
-			const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-			const light = new THREE.AmbientLight(0x404040); // soft white light
-			scene.add(light, directionalLight);
-			const loader = new GLTFLoader().setPath(basePath);
-			loadModel(loader, 'floors/5thfloor/5thfloor.gltf', [0, 0, 0], true);
-			loadModel(loader, 'floors/5thfloor/5thwalls.gltf', [0, 0, 0]);
-			loadModel(loader, 'objects/kitchen/kitchen.gltf', [-0.1, 0, -1.1]);
+		loader.load('objects/hissi/hissi.gltf', async function (gltf) {
+			const model = gltf.scene;
 
-			loader.load('objects/hissi/hissi.gltf', async function (gltf) {
-				const model = gltf.scene;
+			model.position.set(0, 0, 1.5);
 
-				model.position.set(0, 0, 1.5);
+			noTeleportGroup.add(model);
+			const clonedModel = model.clone();
+			clonedModel.position.z -= 2.5; // adjust the value as needed
+			noTeleportGroup.add(clonedModel);
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z -= 2.5; // adjust the value as needed
+			noTeleportGroup.add(anotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
+		});
 
-				noTeleportGroup.add(model);
-				const clonedModel = model.clone();
-				clonedModel.position.z -= 2.5; // adjust the value as needed
-				noTeleportGroup.add(clonedModel);
-				const anotherClonedModel = clonedModel.clone();
-				anotherClonedModel.position.z -= 2.5; // adjust the value as needed
-				noTeleportGroup.add(anotherClonedModel);
-				await renderer.compileAsync(model, camera, scene);
-			});
+		loader.load('objects/hissi/hissiup.gltf', async function (gltf) {
+			const model = gltf.scene;
 
-			loader.load('objects/hissi/hissiup.gltf', async function (gltf) {
-				const model = gltf.scene;
+			model.position.set(0, 0, 1.5);
 
-				model.position.set(0, 0, 1.5);
+			const clonedModel = model.clone();
+			clonedModel.position.z -= 2.5; // adjust the value as needed
 
-				const clonedModel = model.clone();
-				clonedModel.position.z -= 2.5; // adjust the value as needed
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z -= 2.5; // adjust the value as needed
 
-				const anotherClonedModel = clonedModel.clone();
-				anotherClonedModel.position.z -= 2.5; // adjust the value as needed
+			model.children[0].name = '6th-floor';
+			clonedModel.children[0].name = '6th-floor';
+			anotherClonedModel.children[0].name = '6th-floor';
+			interactionGroup.add(model, clonedModel, anotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		loader.load('objects/hissi/hissidown.gltf', async function (gltf) {
+			const model = gltf.scene;
 
-				await renderer.compileAsync(model, camera, scene);
-				model.children[0].name = '6th-floor';
-				clonedModel.children[0].name = '6th-floor';
-				anotherClonedModel.children[0].name = '6th-floor';
-				interactionGroup.add(model, clonedModel, anotherClonedModel);
-			});
-			loader.load('objects/hissi/hissidown.gltf', async function (gltf) {
-				const model = gltf.scene;
+			model.position.set(0, 0, 1.5);
 
-				model.position.set(0, 0, 1.5);
+			const clonedModel = model.clone();
+			clonedModel.position.z -= 2.5; // adjust the value as needed
 
-				const clonedModel = model.clone();
-				clonedModel.position.z -= 2.5; // adjust the value as needed
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z -= 2.5; // adjust the value as needed
 
-				const anotherClonedModel = clonedModel.clone();
-				anotherClonedModel.position.z -= 2.5; // adjust the value as needed
-
-				await renderer.compileAsync(model, camera, scene);
-				model.children[0].name = '2nd-floor';
-				clonedModel.children[0].name = '2nd-floor';
-				anotherClonedModel.children[0].name = '2nd-floor';
-				interactionGroup.add(model, clonedModel, anotherClonedModel);
-			});
+			model.children[0].name = '2nd-floor';
+			clonedModel.children[0].name = '2nd-floor';
+			anotherClonedModel.children[0].name = '2nd-floor';
+			interactionGroup.add(model, clonedModel, anotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
 		});
 	}
 
 	if (target === '6th-floor') {
-		new RGBELoader().setPath(basePath).load('hdr/office.hdr', function (texture) {
-			texture.mapping = THREE.EquirectangularReflectionMapping;
+		const loader = new GLTFLoader().setPath(basePath);
+		loadModel(loader, 'floors/6thfloor/6thfloor.gltf', [0, 0, 0], true);
+		loadModel(loader, 'floors/6thfloor/6thwalls.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/6thfloor/6thdoors.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/6thfloor/smalldeskAndChairgroup1.gltf', [0, 0, 0]);
+		loadModel(loader, 'objects/kitchen/kitchen.gltf', [0, 0, 0]);
 
-			scene.background = texture;
-			scene.environment = texture;
-			renderer.toneMappingExposure = 10.0;
-			const loader = new GLTFLoader().setPath(basePath);
-			const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-			const light = new THREE.AmbientLight(0x404040); // soft white light
-			scene.add(light, directionalLight);
-			loadModel(loader, 'floors/6thfloor/6thfloor.gltf', [0, 0, 0], true);
-			loadModel(loader, 'floors/6thfloor/6thwalls.gltf', [0, 0, 0]);
-			loadModel(loader, 'floors/6thfloor/6thdoors.gltf', [0, 0, 0]);
-			loadModel(loader, 'floors/6thfloor/smalldeskAndChairgroup1.gltf', [0, 0, 0]);
-			loadModel(loader, 'objects/kitchen/kitchen.gltf', [0, 0, 0]);
+		loader.load('objects/smalldesk/smalldesk.gltf', async function (gltf) {
+			const model = gltf.scene;
+			// x-axis (left/right), y-axis (up/down), z-axis (forward/backward)
 
-			loader.load('objects/smalldesk/smalldesk.gltf', async function (gltf) {
-				const model = gltf.scene;
-				// x-axis (left/right), y-axis (up/down), z-axis (forward/backward)
+			model.position.set(10, 0, -10);
+			noTeleportGroup.add(model);
+			const clonedModel = model.clone();
+			// clonedModel.position.z += 2.75; // adjust the value as needed
+			clonedModel.position.set(0, 0, 0);
 
-				model.position.set(10, 0, -10);
-				noTeleportGroup.add(model);
-				const clonedModel = model.clone();
-				// clonedModel.position.z += 2.75; // adjust the value as needed
-				clonedModel.position.set(0, 0, 0);
+			console.log(clonedModel);
+			noTeleportGroup.add(clonedModel);
 
-				console.log(clonedModel);
-				noTeleportGroup.add(clonedModel);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		loader.load('objects/hissi/hissi.gltf', async function (gltf) {
+			const model = gltf.scene;
 
-				await renderer.compileAsync(model, camera, scene);
-			});
-			loader.load('objects/hissi/hissi.gltf', async function (gltf) {
-				const model = gltf.scene;
+			model.position.set(0, 0, 0);
 
-				model.position.set(0, 0, 0);
+			noTeleportGroup.add(model);
+			const clonedModel = model.clone();
+			clonedModel.position.z -= 2.75; // adjust the value as needed
+			noTeleportGroup.add(clonedModel);
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z -= 2.75; // adjust the value as needed
+			noTeleportGroup.add(anotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		loader.load('objects/hissi/hissidown.gltf', async function (gltf) {
+			const model = gltf.scene;
 
-				noTeleportGroup.add(model);
-				const clonedModel = model.clone();
-				clonedModel.position.z -= 2.75; // adjust the value as needed
-				noTeleportGroup.add(clonedModel);
-				const anotherClonedModel = clonedModel.clone();
-				anotherClonedModel.position.z -= 2.75; // adjust the value as needed
-				noTeleportGroup.add(anotherClonedModel);
-				await renderer.compileAsync(model, camera, scene);
-			});
-			loader.load('objects/hissi/hissidown.gltf', async function (gltf) {
-				const model = gltf.scene;
+			model.position.set(0, 0, 0);
 
-				model.position.set(0, 0, 0);
+			const clonedModel = model.clone();
+			clonedModel.position.z -= 2.75; // adjust the value as needed
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z -= 2.75; // adjust the value as needed
+			model.children[0].name = '5th-floor';
+			clonedModel.children[0].name = '5th-floor';
+			anotherClonedModel.children[0].name = '5th-floor';
+			interactionGroup.add(model, clonedModel, anotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		loader.load('objects/hissi/hissiup.gltf', async function (gltf) {
+			const model = gltf.scene;
 
-				const clonedModel = model.clone();
-				clonedModel.position.z -= 2.75; // adjust the value as needed
-				const anotherClonedModel = clonedModel.clone();
-				anotherClonedModel.position.z -= 2.75; // adjust the value as needed
-				model.children[0].name = '5th-floor';
-				clonedModel.children[0].name = '5th-floor';
-				anotherClonedModel.children[0].name = '5th-floor';
-				interactionGroup.add(model, clonedModel, anotherClonedModel);
-				await renderer.compileAsync(model, camera, scene);
-			});
-			loader.load('objects/hissi/hissiup.gltf', async function (gltf) {
-				const model = gltf.scene;
+			model.position.set(0, 0, 0);
 
-				model.position.set(0, 0, 0);
-
-				const clonedModel = model.clone();
-				clonedModel.position.z -= 2.75; // adjust the value as needed
-				const anotherClonedModel = clonedModel.clone();
-				anotherClonedModel.position.z -= 2.75; // adjust the value as needed
-				model.children[0].name = '7th-floor';
-				clonedModel.children[0].name = '7th-floor';
-				anotherClonedModel.children[0].name = '7th-floor';
-				interactionGroup.add(model, clonedModel, anotherClonedModel);
-				await renderer.compileAsync(model, camera, scene);
-			});
+			const clonedModel = model.clone();
+			clonedModel.position.z -= 2.75; // adjust the value as needed
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z -= 2.75; // adjust the value as needed
+			model.children[0].name = '7th-floor';
+			clonedModel.children[0].name = '7th-floor';
+			anotherClonedModel.children[0].name = '7th-floor';
+			interactionGroup.add(model, clonedModel, anotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
 		});
 	}
 	if (target === '7th-floor') {
-		new RGBELoader().setPath(basePath).load('hdr/office.hdr', function (texture) {
-			texture.mapping = THREE.EquirectangularReflectionMapping;
+		const loader = new GLTFLoader().setPath(basePath);
 
-			scene.background = texture;
-			scene.environment = texture;
-			renderer.toneMappingExposure = 10.0;
-			const loader = new GLTFLoader().setPath(basePath);
-			const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-			const light = new THREE.AmbientLight(0x404040); // soft white light
-			scene.add(light, directionalLight);
-			loadModel(loader, 'floors/7thfloor/7thfloor.gltf', [0, 0, 0], true);
-			loadModel(loader, 'floors/7thfloor/7thwalls.gltf', [0, 0, 0]);
-			loadModel(loader, 'floors/7thfloor/7thdoors.gltf', [0, 0, 0]);
-			loadModel(loader, 'floors/7thfloor/smalldeskAndChairgroup1.gltf', [0, 0, 0]);
-			loadModel(loader, 'floors/7thfloor/smalldeskAndChairgroup2.gltf', [0, 0, 0]);
-			loadModel(
-				loader,
-				'objects/coffeemachine/coffeemachinetable.gltf',
-				[0, 0, 0],
-			);
-			// loadModel(loader, 'floors/7thfloor/extraStuff.gltf', [0, 0, 0]);
-			loadModel(loader, 'objects/kitchen/kitchen.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/7thfloor/7thfloor.gltf', [0, 0, 0], true);
+		loadModel(loader, 'floors/7thfloor/7thwalls.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/7thfloor/7thdoors.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/7thfloor/smalldeskAndChairgroup1.gltf', [0, 0, 0]);
+		loadModel(loader, 'floors/7thfloor/smalldeskAndChairgroup2.gltf', [0, 0, 0]);
+		loadModel(loader, 'objects/coffeemachine/coffeemachinetable.gltf', [0, 0, 0]);
+		// loadModel(loader, 'floors/7thfloor/extraStuff.gltf', [0, 0, 0]);
+		loadModel(loader, 'objects/kitchen/kitchen.gltf', [0, 0, 0]);
 
-			loader.load('objects/smalldesk/smalldesk.gltf', async function (gltf) {
-				const model = gltf.scene;
-				// x-axis (left/right), y-axis (up/down), z-axis (forward/backward)
+		loader.load('objects/smalldesk/smalldesk.gltf', async function (gltf) {
+			const model = gltf.scene;
+			// x-axis (left/right), y-axis (up/down), z-axis (forward/backward)
 
-				model.position.set(10, 0, -10);
-				noTeleportGroup.add(model);
-				const clonedModel = model.clone();
-				// clonedModel.position.z += 2.75; // adjust the value as needed
-				clonedModel.position.set(0, 0, 0);
-				clonedModel.children[0].name = 'finalboss';
-				console.log(clonedModel);
-				noTeleportGroup.add(clonedModel);
+			model.position.set(10, 0, -10);
+			noTeleportGroup.add(model);
+			const clonedModel = model.clone();
+			// clonedModel.position.z += 2.75; // adjust the value as needed
+			clonedModel.position.set(0, 0, 0);
+			clonedModel.children[0].name = 'finalboss';
+			console.log(clonedModel);
+			noTeleportGroup.add(clonedModel);
 
-				await renderer.compileAsync(model, camera, scene);
-			});
-			loader.load('objects/hissi/hissi.gltf', async function (gltf) {
-				const model = gltf.scene;
-
-				model.position.set(0, 0, 0);
-
-				noTeleportGroup.add(model);
-				const clonedModel = model.clone();
-				clonedModel.position.z -= 2.75; // adjust the value as needed
-				noTeleportGroup.add(clonedModel);
-				const anotherClonedModel = clonedModel.clone();
-				anotherClonedModel.position.z -= 2.75; // adjust the value as needed
-				noTeleportGroup.add(anotherClonedModel);
-				await renderer.compileAsync(model, camera, scene);
-			});
-			loader.load('objects/hissi/hissidown.gltf', async function (gltf) {
-				const model = gltf.scene;
-
-				model.position.set(0, 0, 0);
-
-				const clonedModel = model.clone();
-				clonedModel.position.z -= 2.75; // adjust the value as needed
-
-				const anotherClonedModel = clonedModel.clone();
-				anotherClonedModel.position.z -= 2.75; // adjust the value as needed
-
-				model.children[0].name = '6th-floor';
-				clonedModel.children[0].name = '6th-floor';
-				anotherClonedModel.children[0].name = '6th-floor';
-				interactionGroup.add(model, clonedModel, anotherClonedModel);
-				await renderer.compileAsync(model, camera, scene);
-			});
-			loader.load('objects/hissi/hissiup.gltf', async function (gltf) {
-				const model = gltf.scene;
-
-				model.position.set(0, 0, 0);
-
-				noTeleportGroup.add(model);
-				const clonedModel = model.clone();
-				clonedModel.position.z -= 2.75; // adjust the value as needed
-				noTeleportGroup.add(clonedModel);
-				const anotherClonedModel = clonedModel.clone();
-				anotherClonedModel.position.z -= 2.75; // adjust the value as needed
-				noTeleportGroup.add(anotherClonedModel);
-				await renderer.compileAsync(model, camera, scene);
-			});
-			loader.load(
-				'objects/coffeemachine/coffeemachine.gltf',
-				async function (gltf) {
-					const model = gltf.scene;
-
-					model.position.set(0, 0, 0);
-					model.children[0].name = 'finalboss';
-					interactionGroup.add(model);
-
-					await renderer.compileAsync(model, camera, scene);
-				},
-			);
+			await renderer.compileAsync(model, camera, scene);
 		});
+		loader.load('objects/hissi/hissi.gltf', async function (gltf) {
+			const model = gltf.scene;
+
+			model.position.set(0, 0, 0);
+
+			noTeleportGroup.add(model);
+			const clonedModel = model.clone();
+			clonedModel.position.z -= 2.75; // adjust the value as needed
+			noTeleportGroup.add(clonedModel);
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z -= 2.75; // adjust the value as needed
+			noTeleportGroup.add(anotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		loader.load('objects/hissi/hissidown.gltf', async function (gltf) {
+			const model = gltf.scene;
+
+			model.position.set(0, 0, 0);
+
+			const clonedModel = model.clone();
+			clonedModel.position.z -= 2.75; // adjust the value as needed
+
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z -= 2.75; // adjust the value as needed
+
+			model.children[0].name = '6th-floor';
+			clonedModel.children[0].name = '6th-floor';
+			anotherClonedModel.children[0].name = '6th-floor';
+			interactionGroup.add(model, clonedModel, anotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		loader.load('objects/hissi/hissiup.gltf', async function (gltf) {
+			const model = gltf.scene;
+
+			model.position.set(0, 0, 0);
+
+			noTeleportGroup.add(model);
+			const clonedModel = model.clone();
+			clonedModel.position.z -= 2.75; // adjust the value as needed
+			noTeleportGroup.add(clonedModel);
+			const anotherClonedModel = clonedModel.clone();
+			anotherClonedModel.position.z -= 2.75; // adjust the value as needed
+			noTeleportGroup.add(anotherClonedModel);
+			await renderer.compileAsync(model, camera, scene);
+		});
+		loader.load(
+			'objects/coffeemachine/coffeemachine.gltf',
+			async function (gltf) {
+				const model = gltf.scene;
+
+				model.position.set(0, 0, 0);
+				model.children[0].name = 'finalboss';
+				interactionGroup.add(model);
+
+				await renderer.compileAsync(model, camera, scene);
+			},
+		);
 	}
 }
