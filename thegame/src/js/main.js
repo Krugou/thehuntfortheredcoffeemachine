@@ -138,7 +138,7 @@ export function startVR() {
 	// Enable WebXR in the renderer
 	marker = new THREE.Mesh(
 		new THREE.CircleGeometry(0.25, 32).rotateX(-Math.PI / 2),
-		new THREE.MeshBasicMaterial({color: 0x404040}),
+		new THREE.MeshBasicMaterial({color: 0x0000ff}),
 	);
 	scene.add(marker);
 	renderer.xr.enabled = true;

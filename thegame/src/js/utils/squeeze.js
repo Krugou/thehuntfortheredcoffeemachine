@@ -28,9 +28,18 @@ export function onSqueezeEnd() {
 			return;
 		}
 
+		// Calculate the distance between the current position and the intersection
+		const currentPosition = renderer.xr.getCamera().position;
+		const distance = currentPosition.distanceTo(INTERSECTION);
+
+		// If the distance is more than 2 meters, don't teleport
+		if (distance > 4) {
+			return;
+		}
+
 		const offsetPosition = {
 			x: -INTERSECTION.x,
-			y: 0,
+			y: -INTERSECTION.y,
 			z: -INTERSECTION.z,
 			w: 1,
 		};
@@ -38,6 +47,7 @@ export function onSqueezeEnd() {
 		const transform = new XRRigidTransform(offsetPosition, offsetRotation);
 		const teleportSpaceOffset =
 			baseReferenceSpace.getOffsetReferenceSpace(transform);
+
 		renderer.xr.setReferenceSpace(teleportSpaceOffset);
 	}
 }
