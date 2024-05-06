@@ -1,0 +1,11 @@
+Model Information:
+* title:	Flashlight
+* source:	https://sketchfab.com/3d-models/flashlight-3c1b7f53b09249618ebe9aa37a164e0f
+* author:	davibatnas (https://sketchfab.com/davibatnas)
+
+Model License:
+* license type:	CC-BY-SA-4.0 (http://creativecommons.org/licenses/by-sa/4.0/)
+* requirements:	Author must be credited. Modified versions must have the same license. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Flashlight" (https://sketchfab.com/3d-models/flashlight-3c1b7f53b09249618ebe9aa37a164e0f) by davibatnas (https://sketchfab.com/davibatnas) licensed under CC-BY-SA-4.0 (http://creativecommons.org/licenses/by-sa/4.0/)

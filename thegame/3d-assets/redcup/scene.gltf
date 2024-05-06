@@ -1,0 +1,220 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 14237,
+      "max": [
+        0.4491960108280182,
+        0.5554019808769226,
+        1.1981070041656494
+      ],
+      "min": [
+        -0.33914199471473694,
+        -0.5683140158653259,
+        0.051635000854730606
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 170844,
+      "componentType": 5126,
+      "count": 14237,
+      "max": [
+        0.9999943971633911,
+        0.9999994039535522,
+        0.9999562501907349
+      ],
+      "min": [
+        -0.9999868869781494,
+        -0.9999535083770752,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 85080,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 341688,
+      "componentType": 5126,
+      "count": 6859,
+      "max": [
+        0.4303649961948395,
+        0.20129400491714478,
+        1.198259949684143
+      ],
+      "min": [
+        -0.320360004901886,
+        -0.5492600202560425,
+        0.09034900367259979
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 423996,
+      "componentType": 5126,
+      "count": 6859,
+      "max": [
+        0.9999861717224121,
+        0.9999678134918213,
+        1.0
+      ],
+      "min": [
+        -0.9999957084655762,
+        -0.9999983310699463,
+        -0.000800072739366442
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 340320,
+      "componentType": 5125,
+      "count": 40824,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Davide Specchi (https://sketchfab.com/Davide.Specchi)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/cup-of-coffee-8b50e457f817453c8e62d93aa016565b",
+      "title": "Cup of Coffee"
+    },
+    "generator": "Sketchfab-12.67.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 503616,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 506304,
+      "byteOffset": 503616,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 1009920,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Material.021",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.6358071275813759,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "metallicFactor": 0.3300393995220984,
+        "roughnessFactor": 0.2747493448613416
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Material.022",
+      "pbrMetallicRoughness": {
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.15314588159470777
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Object_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0
+          },
+          "indices": 2,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Object_1",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 4,
+            "POSITION": 3
+          },
+          "indices": 5,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2,
+        3
+      ],
+      "name": "scrivania BLENDER RENDER-cup2_obj_0.obj.cleaner.materialmerger.gles"
+    },
+    {
+      "mesh": 0,
+      "name": "Object_2"
+    },
+    {
+      "mesh": 1,
+      "name": "Object_3"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
