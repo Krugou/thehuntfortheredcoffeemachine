@@ -108,6 +108,8 @@ export function loadmodels(target) {
 		loadModel(loader, 'floors/5thfloor/5thfloor.gltf', [0, 0, 0], true);
 		loadModel(loader, 'floors/5thfloor/5thwalls.gltf', [0, 0, 0]);
 		loadModel(loader, 'objects/kitchen/kitchen.gltf', [-0.1, 0, -1.1]);
+		loadModel(loader, 'floors/5thfloor/5thfurnituregroup.gltf', [0, 0, 0]);
+
 
 		loader.load('objects/hissi/hissi.gltf', async function (gltf) {
 			const model = gltf.scene;
