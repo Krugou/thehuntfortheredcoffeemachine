@@ -152,6 +152,7 @@ async function addUserToFirestore(nickName) {
 		console.error('Error adding document: ', e);
 	}
 }
+export let score 
 export async function updateEndTimeAndCalculateScoreFromStartTimeAndEndTime() {
 	try {
 		const userRef = doc(db, 'highscores', userDocId);
@@ -164,7 +165,7 @@ export async function updateEndTimeAndCalculateScoreFromStartTimeAndEndTime() {
 		// Get the updated document
 		const userDoc = await getDoc(userRef);
 
-		const score = calculateScore(
+		score = calculateScore(
 			userDoc.data().startTime,
 			userDoc.data().endTime,
 		);

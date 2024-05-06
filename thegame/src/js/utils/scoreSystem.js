@@ -3,13 +3,14 @@ import * as THREE from 'three';
 import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
 import {FontLoader} from 'three/addons/loaders/FontLoader.js';
 import {noTeleportGroup} from '../main';
+import {score} from '../page';
 export async function getHighScores(db) {
 	try {
 		// Create a query against the collection
 		const q = query(
 			collection(db, 'highscores'),
 			orderBy('score', 'asc'),
-			limit(5),
+			limit(8),
 		);
 
 		const querySnapshot = await getDocs(q);
@@ -26,7 +27,7 @@ export async function getHighScores(db) {
 }
 export async function displayHighScores(scene, db) {
 	const loader = new FontLoader();
-	const yPosition = 2;
+	const yPosition = 2.5;
 	const zPosition = 54;
 	const xPosition = 7;
 	loader.load(
@@ -39,7 +40,15 @@ export async function displayHighScores(scene, db) {
 					size: 0.12,
 					height: 0.01,
 				});
-				const headerGeometry2 = new TextGeometry('Fastest times:', {
+				const headerGeometry2 = new TextGeometry(
+					'Your time was: ' + score + ' seconds',
+					{
+						font: font,
+						size: 0.1,
+						height: 0.01,
+					},
+				);
+				const headerGeometry3 = new TextGeometry('Fastest times:', {
 					font: font,
 					size: 0.1,
 					height: 0.01,
@@ -49,15 +58,18 @@ export async function displayHighScores(scene, db) {
 
 				const headerMesh = new THREE.Mesh(headerGeometry, headerMaterial);
 				const headerMesh2 = new THREE.Mesh(headerGeometry2, headerMaterial);
+				const headerMesh3 = new THREE.Mesh(headerGeometry3, headerMaterial);
 
 				// Position the header mesh
 				headerMesh.position.set(xPosition, yPosition + 0.5, zPosition);
-				headerMesh2.position.set(xPosition, yPosition, zPosition);
+				headerMesh2.position.set(xPosition, yPosition + 0.25, zPosition);
+				headerMesh3.position.set(xPosition, yPosition, zPosition);
 				headerMesh2.rotation.y = Math.PI;
 				headerMesh.rotation.y = Math.PI;
+				headerMesh3.rotation.y = Math.PI;
 
 				// Add the header mesh to the scene
-				noTeleportGroup.add(headerMesh, headerMesh2);
+				noTeleportGroup.add(headerMesh, headerMesh2, headerMesh3);
 
 				// Display the high scores
 				highScores.forEach((highScore, index) => {
@@ -82,7 +94,7 @@ export async function displayHighScores(scene, db) {
 					const verticalSpacing = 0.2; // Define the vertical spacing between each mesh
 					mesh.position.set(
 						xPosition,
-						yPosition - 0.5 - index * verticalSpacing,
+						yPosition - 0.25 - index * verticalSpacing,
 						zPosition,
 					);
 					mesh.rotation.y = Math.PI;
