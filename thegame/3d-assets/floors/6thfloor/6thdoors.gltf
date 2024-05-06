@@ -1,12 +1,114 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.1.62",
+		"generator":"Khronos glTF Blender I/O v4.1.63",
 		"version":"2.0"
 	},
 	"scene":0,
 	"scenes":[
 		{
-			"name":"Scene"
+			"name":"Scene",
+			"nodes":[
+				0
+			]
+		}
+	],
+	"nodes":[
+		{
+			"mesh":0,
+			"name":"doors",
+			"scale":[
+				0.06147339940071106,
+				1,
+				0.6290357112884521
+			],
+			"translation":[
+				1.139055848121643,
+				0,
+				-36.298919677734375
+			]
+		}
+	],
+	"meshes":[
+		{
+			"name":"doors",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":0,
+						"NORMAL":1,
+						"TEXCOORD_0":2
+					},
+					"indices":3
+				}
+			]
+		}
+	],
+	"accessors":[
+		{
+			"bufferView":0,
+			"componentType":5126,
+			"count":4344,
+			"max":[
+				377.3397216796875,
+				2.0999999046325684,
+				140.03378295898438
+			],
+			"min":[
+				-73.20677185058594,
+				0,
+				-13.398115158081055
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":1,
+			"componentType":5126,
+			"count":4344,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":2,
+			"componentType":5126,
+			"count":4344,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":3,
+			"componentType":5123,
+			"count":8364,
+			"type":"SCALAR"
+		}
+	],
+	"bufferViews":[
+		{
+			"buffer":0,
+			"byteLength":52128,
+			"byteOffset":0,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":52128,
+			"byteOffset":52128,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":34752,
+			"byteOffset":104256,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":16728,
+			"byteOffset":139008,
+			"target":34963
+		}
+	],
+	"buffers":[
+		{
+			"byteLength":155736,
+			"uri":"6thdoors.bin"
 		}
 	]
 }
