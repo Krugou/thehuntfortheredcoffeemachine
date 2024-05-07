@@ -34,7 +34,7 @@ export function moveMarker() {
 		if (intersects.length > 0) {
 			INTERSECTION = intersects[0].point;
 			// fix the y-axis to 0
-			INTERSECTION.y = 0.01;
+			INTERSECTION.y = 0.1;
 		}
 	}
 	if (INTERSECTION) marker.position.copy(INTERSECTION);
