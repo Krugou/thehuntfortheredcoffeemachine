@@ -33,7 +33,7 @@ export function onSqueezeEnd() {
 		const distance = currentPosition.distanceTo(INTERSECTION);
 
 		// If the distance is more than 2 meters, don't teleport
-		if (distance > 4) {
+		if (distance > 6) {
 			return;
 		}
 
