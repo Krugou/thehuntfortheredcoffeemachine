@@ -10,7 +10,7 @@
 	},
 	"dependencies": {
 		"@tweenjs/tween.js": "^23.1.1",
-		"firebase": "^10.11.1",
+		"firebase": "^12.7.0",
 		"rollup-plugin-terser": "^7.0.2",
 		"three": "^0.162.0"
 	},
